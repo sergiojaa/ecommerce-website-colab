@@ -3,12 +3,34 @@ import React from "react";
 export default function ProductCard() {
   return (
     <div>
-      <img
-        className="mb-4"
-        src="https://media.veli.store/media/product/71-D1xCuVwL._AC_SL1500_.jpg"
-        alt=""
-      />
+      <div className="relative">
+        <img
+          className="mb-4"
+          src="https://media.veli.store/media/product/71-D1xCuVwL._AC_SL1500_.jpg"
+          alt=""
+        />
+        <p className="absolute top-0 left-0 bg-red-500">-40%</p>
+
+        <svg
+          className="absolute top-0 right-0 bg-red-500"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M8 5C5.7912 5 4 6.73964 4 8.88594C4 10.6185 4.7 14.7305 11.5904 18.8873C11.7138 18.961 11.8555 19 12 19C12.1445 19 12.2862 18.961 12.4096 18.8873C19.3 14.7305 20 10.6185 20 8.88594C20 6.73964 18.2088 5 16 5C13.7912 5 12 7.35511 12 7.35511C12 7.35511 10.2088 5 8 5Z"
+            stroke="black"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </div>
+
       <p className="mb-2">Apple MacBook Air M3 ლეპტოპი</p>
+
       <div className="flex mb-2">
         <p className="mr-3">$1200</p>
         <p>$2000</p>
