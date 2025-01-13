@@ -5,7 +5,7 @@ import ProductSlider from "../components/ProductSlider"; // Update the import pa
 
 export default function Home() {
   return (
-    <div style={{ maxWidth: "1170px", margin: "auto" }}>
+    <div style={{ maxWidth: "1170px", margin: "auto", marginTop: "150px" }}>
       <ProductSlider />
     </div>
   );
