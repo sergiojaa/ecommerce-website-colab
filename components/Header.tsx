@@ -18,7 +18,7 @@ export default function Header() {
                 <div>
                     <Link href={'/'}>
                     <Image
-                                                        onClick={() => handleClick('Home')}
+                         onClick={() => handleClick('Home')}
 
                         src="/Exclusive.png"
                         width={118}
@@ -37,12 +37,16 @@ export default function Header() {
                                     Home
                                 </li>
                         </Link>
-                        <li
-                            className={active === 'Contact' ? 'border-b-2 border-black' : ''}
-                            onClick={() => handleClick('Contact')}
-                        >
-                            Contact
-                        </li>
+                        <Link href="/contact">
+                            <li
+                                className={active === 'Contact' ? 'border-b-2 border-black' : ''}
+                                onClick={() => handleClick('Contact')}
+                            >
+                                Contact
+                            </li>
+                        </Link>
+
+                   
                         <li
                             className={active === 'About' ? 'border-b-2 border-black' : ''}
                             onClick={() => handleClick('About')}
