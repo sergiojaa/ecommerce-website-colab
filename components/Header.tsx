@@ -13,8 +13,8 @@ export default function Header() {
     };
 
     return (
-        <div>
-            <div className="flex items-center justify-around mt-5">
+        <div  >
+            <div className="flex w-[1080px] mx-auto items-center items-center justify-around text-center mt-5">
                 <div>
                     <Image
                         src="/Exclusive.png"
