@@ -16,12 +16,14 @@ export default function Header() {
         <div  >
             <div className="flex w-[1080px] mx-auto items-center items-center justify-around text-center mt-5">
                 <div>
+                    <Link href={'/'}>
                     <Image
                         src="/Exclusive.png"
                         width={118}
                         height={24}
                         alt="logo"
-                    />
+                    /></Link>
+                   
                 </div>
                 <div>
                     <ul className="flex items-center gap-10 cursor-pointer">

@@ -50,7 +50,7 @@ export default function SignUp() {
       <div className="flex justify-center items-center mt-3">
         <p>
           Already have an account?{" "}
-          <Link className="border border-b-black" href={"/"}>
+          <Link className="border border-b-black" href={"/SignIn"}>
             Log in
           </Link>
         </p>
