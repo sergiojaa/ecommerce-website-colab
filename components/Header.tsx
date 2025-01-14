@@ -18,6 +18,8 @@ export default function Header() {
                 <div>
                     <Link href={'/'}>
                     <Image
+                                                        onClick={() => handleClick('Home')}
+
                         src="/Exclusive.png"
                         width={118}
                         height={24}
