@@ -46,13 +46,15 @@ export default function Header() {
                             </li>
                         </Link>
 
-                   
-                        <li
+                   <Link href={'/about'}>
+                   <li
                             className={active === 'About' ? 'border-b-2 border-black' : ''}
                             onClick={() => handleClick('About')}
                         >
                             About
                         </li>
+                   </Link>
+                       
                         <Link href="/SignUp">
                                 <li
                                     className={active === 'Sign Up' ? 'border-b-2 border-black' : ''}
