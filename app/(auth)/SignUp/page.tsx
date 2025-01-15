@@ -1,4 +1,4 @@
-"use client";
+'use client'
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import Image from "next/image";
@@ -10,10 +10,10 @@ export default function SignUp() {
   const [user, setUser] = useState({
     name: "",
     email: "",
-    phone_number: '',
-
+    phone_number: "",
     password: "",
   });
+  const [emailOrNumberInput, setEmailOrNumberInput] = useState(""); // Raw input for email/phone
   const [error, setError] = useState("");
   const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
   const numberRegex = /^\d{9,}$/;
@@ -21,25 +21,32 @@ export default function SignUp() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setUser((prevUser) => ({
-      ...prevUser,
-      [name]: value,
-    }));
 
     if (name === "emailOrNumber") {
-      if (!emailRegex.test(value) && !numberRegex.test(value)) {
-        setError("შეიყვანეთ სწორი ელ-ფოსტა ან ნომერი");
+      setEmailOrNumberInput(value); // Update raw input value
+      if (emailRegex.test(value)) {
+        setUser((prevState) => ({
+          ...prevState,
+          email: value,
+          phone_number: "", // Clear phone number when email is valid
+        }));
+        setError(""); // Clear error if input is valid
+      } else if (numberRegex.test(value)) {
+        setUser((prevState) => ({
+          ...prevState,
+          phone_number: value,
+          email: "", // Clear email when phone number is valid
+        }));
+        setError(""); // Clear error if input is valid
       } else {
-        setError("");
+        setError("Please enter a valid email or phone number");
       }
-    } else if (name === "password") {
-      if (!passwordRegex.test(value)) {
-        setError(
-          "პაროლი უნდა შეიცავდეს მინიმუმ 8 სიმბოლოს, ერთ დიდ ასოს და სპეციალურ სიმბოლოს"
-        );
-      } else {
-        setError("");
-      }
+    } else {
+      setUser((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+      setError(""); // Clear error for other fields
     }
   };
 
@@ -47,35 +54,35 @@ export default function SignUp() {
     e.preventDefault();
 
     if (!user.name) {
-      setError("სახელი სავალდებულოა");
+      setError("Name is required");
       return;
     }
-    // if (!emailRegex.test(user.emailOrNumber) && !numberRegex.test(user.emailOrNumber)) {
-    //   setError("შეიყვანეთ სწორი ელ-ფოსტა ან ნომერი");
-    //   return;
-    // }
-    // if (!passwordRegex.test(user.password)) {
-    //   setError("პაროლი არ არის საკმარისად ძლიერი");
-    //   return;
-    // }
+    if (!user.email && !user.phone_number) {
+      setError("Email or phone number is required");
+      return;
+    }
+    if (!passwordRegex.test(user.password)) {
+      setError("Password is not strong enough");
+      return;
+    }
 
     setError("");
 
+    const data = {
+      name: user.name,
+      email: user.email || undefined,
+      phone_number: user.phone_number || undefined,
+      password: user.password,
+    };
+
     axios
-      .post("https://geguchadzeadmin.pythonanywhere.com/accounts/register/", {
-        name: 'admin123',
-        email: 'kaliashv@gmail.com',
-        phone_number: '',
-
-
-        password: 'Algounii66!',
-      })
+      .post("https://geguchadzeadmin.pythonanywhere.com/accounts/register/", data)
       .then((response) => {
         console.log("Registration successful", response.data);
         router.push("/SignIn");
       })
       .catch((err) => {
-        setError("რეგისტრაცია ვერ მოხერხდა, გთხოვთ სცადოთ კიდევ ერთხელ");
+        setError("Registration failed, please try again");
         console.error("Error:", err);
       });
   };
@@ -104,8 +111,8 @@ export default function SignUp() {
             <input
               onChange={handleInputChange}
               placeholder="Email or Phone Number"
-              name="email"
-              value={user.email}
+              name="emailOrNumber"
+              value={emailOrNumberInput}
               className="border-b-2 border-gray-300 focus:outline-none focus:border-blue-500"
               type="text"
             />
@@ -139,7 +146,7 @@ export default function SignUp() {
           <div className="flex justify-center items-center mt-3">
             <p>
               Already have an account?{" "}
-              <Link className="border-b border-black" href={"/SignIn"}>
+              <Link href={"/SignIn"} className="border-b border-black">
                 Log in
               </Link>
             </p>
