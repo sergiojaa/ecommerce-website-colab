@@ -2,7 +2,7 @@ import React from "react";
 
 export default function ProductCard() {
   return (
-    <div className="group cursor-pointer">
+    <div className="group cursor-pointer ">
       <div className="relative">
         <img
           className="mb-4"
