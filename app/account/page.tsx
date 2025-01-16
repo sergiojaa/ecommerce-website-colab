@@ -1,6 +1,6 @@
 export default function account() {
     return (
-        <div className="relative flex items-center justify-center h-screen">
+        <div className="relative  mb-40 flex items-center justify-center h-screen">
             <div className="absolute left-16 top-16 ml-5">
                 <h3> <span className="text-gray-500 mr-1">Home /</span>  My account</h3>
             </div>
@@ -14,7 +14,7 @@ export default function account() {
             <div className="flex  justify-center items-center">
 
 
-                <div className="flex bg-white shadow-xl p-10 flex-col gap-4" >
+                <div className="flex bg-white shadow-xl ml-32 mt-40  p-10 flex-col gap-4" >
 
                     <div>
                         <h4>Edit Your Profile</h4>
@@ -22,22 +22,22 @@ export default function account() {
                     <div className="flex gap-3 items-center">
                         <div className="flex flex-col">
                             <label htmlFor="">First Name</label>
-                            <input placeholder="Md" className="w-[260px] h-[40px] bg-[#F5F5F5]" type="text" />
+                            <input placeholder="Md" className="w-[300px] h-[40px] bg-[#F5F5F5]" type="text" />
                         </div>
                         <div className="flex  flex-col">
                             <label htmlFor="">Last Name</label>
-                            <input placeholder="Rimel" className="w-[260px] h-[40px]  bg-[#F5F5F5]" type="text" />
+                            <input placeholder="Rimel" className="w-[300px] h-[40px]  bg-[#F5F5F5]" type="text" />
                         </div>
 
                     </div>
                     <div className="flex gap-3 items-center">
                         <div className="flex flex-col">
                             <label htmlFor="">Email</label>
-                            <input placeholder="rimel1111@gmail.com" className="w-[260px] h-[40px]  bg-[#F5F5F5]" type="text" />
+                            <input placeholder="rimel1111@gmail.com" className="w-[300px] h-[40px]  bg-[#F5F5F5]" type="text" />
                         </div>
                         <div className="flex flex-col">
                             <label htmlFor="">Address</label>
-                            <input placeholder="Kingston, 5236, United State" className="w-[260px] h-[40px]  bg-[#F5F5F5]" type="text" />
+                            <input placeholder="Kingston, 5236, United State" className="w-[300px] h-[40px]  bg-[#F5F5F5]" type="text" />
                         </div>
 
                     </div>
@@ -45,9 +45,9 @@ export default function account() {
                         <div className="flex flex-col gap-2">
                             <label htmlFor="">Password Changes</label>
                             <div className="flex flex-col gap-5">
-                                <input placeholder="Current Password" className="w-[530px] h-[40px] bg-[#F5F5F5]" type="text" />
-                                <input placeholder="New Password" className="w-[530px] h-[40px] bg-[#F5F5F5]" type="text" />
-                                <input placeholder="Confirm New Password" className="w-[530px] h-[40px] bg-[#F5F5F5]" type="text" />
+                                <input placeholder="Current Password" className="w-[610px] h-[40px] bg-[#F5F5F5]" type="text" />
+                                <input placeholder="New Password" className="w-[610px] h-[40px] bg-[#F5F5F5]" type="text" />
+                                <input placeholder="Confirm New Password" className="w-[610px] h-[40px] bg-[#F5F5F5]" type="text" />
 
                             </div>
                             <div>
