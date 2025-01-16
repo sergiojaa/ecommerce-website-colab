@@ -1,6 +1,8 @@
 import React from "react";
 import ProductCard from "./ProductCard";
-export default function TopProducts() {
+export default async function TopProducts() {
+  const data = await fetch("https://api.vercel.app/blog");
+  const posts = await data.json();
   return (
     <div className="text-center mb-[140px]">
       <div className="flex justify-between items-end mb-[30px]">
@@ -20,10 +22,9 @@ export default function TopProducts() {
         </div>
       </div>
       <div className="grid grid-cols-4 gap-4">
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
+        {posts.slice(0, 4).map((post: any) => (
+          <ProductCard key={post.id} {...post} />
+        ))}
       </div>
     </div>
   );

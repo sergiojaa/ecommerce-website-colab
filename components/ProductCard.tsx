@@ -1,14 +1,27 @@
 import React from "react";
 
-export default function ProductCard() {
+interface Product {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  image: string;
+}
+
+interface ProductCardProps {
+  product: Product | undefined; // product შესაძლოა იყოს undefined
+}
+
+const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  // Проверка, что product существует перед его использованием
+  if (!product) {
+    return <div>Product data is unavailable.</div>;
+  }
+
   return (
     <div className="group cursor-pointer ">
       <div className="relative">
-        <img
-          className="mb-4"
-          src="https://media.veli.store/media/product/71-D1xCuVwL._AC_SL1500_.jpg"
-          alt=""
-        />
+        <img className="mb-4" src={product.image} alt={product.title} />
         <p className="invisible group-hover:visible transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:bg-black absolute bottom-0 w-full bg-black text-white text-center text-base font-medium p-2 border-t-0 border-r-0 rounded-bl-lg rounded-br-lg">
           Add To Cart
         </p>
@@ -51,12 +64,12 @@ export default function ProductCard() {
         </div>
       </div>
 
-      <p className="mb-2 text-base font-medium text-left">
-        Apple MacBook Air M3 ლეპტოპი
-      </p>
+      <p className="mb-2 text-base font-medium text-left">{product.title}</p>
 
       <div className="flex mb-2 text-base">
-        <p className="mr-3 text-base text-[#DB4444] font-medium">$1200</p>
+        <p className="mr-3 text-base text-[#DB4444] font-medium">
+          {product.price}
+        </p>
         <p className="mr-3 text-base text-[#808080] font-medium line-through">
           $2000
         </p>
@@ -76,70 +89,11 @@ export default function ProductCard() {
               d="M14.673 7.17173C15.7437 6.36184 15.1709 4.65517 13.8284 4.65517H11.3992C10.7853 4.65517 10.243 4.25521 10.0617 3.66868L9.33754 1.32637C8.9309 0.0110567 7.0691 0.0110564 6.66246 1.32637L5.93832 3.66868C5.75699 4.25521 5.21469 4.65517 4.60078 4.65517H2.12961C0.791419 4.65517 0.215919 6.35274 1.27822 7.16654L3.39469 8.78792C3.85885 9.1435 4.05314 9.75008 3.88196 10.3092L3.11296 12.8207C2.71416 14.1232 4.22167 15.1704 5.30301 14.342L7.14861 12.9281C7.65097 12.5432 8.34903 12.5432 8.85139 12.9281L10.6807 14.3295C11.7636 15.159 13.2725 14.1079 12.8696 12.8046L12.09 10.2827C11.9159 9.71975 12.113 9.10809 12.5829 8.75263L14.673 7.17173Z"
               fill="#D3D3D3"
             />
-          </svg>{" "}
-          <svg
-            className="m-[4px]"
-            width="16"
-            height="15"
-            viewBox="0 0 16 15"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M14.673 7.17173C15.7437 6.36184 15.1709 4.65517 13.8284 4.65517H11.3992C10.7853 4.65517 10.243 4.25521 10.0617 3.66868L9.33754 1.32637C8.9309 0.0110567 7.0691 0.0110564 6.66246 1.32637L5.93832 3.66868C5.75699 4.25521 5.21469 4.65517 4.60078 4.65517H2.12961C0.791419 4.65517 0.215919 6.35274 1.27822 7.16654L3.39469 8.78792C3.85885 9.1435 4.05314 9.75008 3.88196 10.3092L3.11296 12.8207C2.71416 14.1232 4.22167 15.1704 5.30301 14.342L7.14861 12.9281C7.65097 12.5432 8.34903 12.5432 8.85139 12.9281L10.6807 14.3295C11.7636 15.159 13.2725 14.1079 12.8696 12.8046L12.09 10.2827C11.9159 9.71975 12.113 9.10809 12.5829 8.75263L14.673 7.17173Z"
-              fill="#D3D3D3"
-            />
-          </svg>{" "}
-          <svg
-            className="m-[4px]"
-            width="16"
-            height="15"
-            viewBox="0 0 16 15"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M14.673 7.17173C15.7437 6.36184 15.1709 4.65517 13.8284 4.65517H11.3992C10.7853 4.65517 10.243 4.25521 10.0617 3.66868L9.33754 1.32637C8.9309 0.0110567 7.0691 0.0110564 6.66246 1.32637L5.93832 3.66868C5.75699 4.25521 5.21469 4.65517 4.60078 4.65517H2.12961C0.791419 4.65517 0.215919 6.35274 1.27822 7.16654L3.39469 8.78792C3.85885 9.1435 4.05314 9.75008 3.88196 10.3092L3.11296 12.8207C2.71416 14.1232 4.22167 15.1704 5.30301 14.342L7.14861 12.9281C7.65097 12.5432 8.34903 12.5432 8.85139 12.9281L10.6807 14.3295C11.7636 15.159 13.2725 14.1079 12.8696 12.8046L12.09 10.2827C11.9159 9.71975 12.113 9.10809 12.5829 8.75263L14.673 7.17173Z"
-              fill="#D3D3D3"
-            />
-          </svg>{" "}
-          <svg
-            className="m-[4px]"
-            width="16"
-            height="15"
-            viewBox="0 0 16 15"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M14.673 7.17173C15.7437 6.36184 15.1709 4.65517 13.8284 4.65517H11.3992C10.7853 4.65517 10.243 4.25521 10.0617 3.66868L9.33754 1.32637C8.9309 0.0110567 7.0691 0.0110564 6.66246 1.32637L5.93832 3.66868C5.75699 4.25521 5.21469 4.65517 4.60078 4.65517H2.12961C0.791419 4.65517 0.215919 6.35274 1.27822 7.16654L3.39469 8.78792C3.85885 9.1435 4.05314 9.75008 3.88196 10.3092L3.11296 12.8207C2.71416 14.1232 4.22167 15.1704 5.30301 14.342L7.14861 12.9281C7.65097 12.5432 8.34903 12.5432 8.85139 12.9281L10.6807 14.3295C11.7636 15.159 13.2725 14.1079 12.8696 12.8046L12.09 10.2827C11.9159 9.71975 12.113 9.10809 12.5829 8.75263L14.673 7.17173Z"
-              fill="#D3D3D3"
-            />
-          </svg>{" "}
-          <svg
-            className="m-[4px]"
-            width="16"
-            height="15"
-            viewBox="0 0 16 15"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M14.673 7.17173C15.7437 6.36184 15.1709 4.65517 13.8284 4.65517H11.3992C10.7853 4.65517 10.243 4.25521 10.0617 3.66868L9.33754 1.32637C8.9309 0.0110567 7.0691 0.0110564 6.66246 1.32637L5.93832 3.66868C5.75699 4.25521 5.21469 4.65517 4.60078 4.65517H2.12961C0.791419 4.65517 0.215919 6.35274 1.27822 7.16654L3.39469 8.78792C3.85885 9.1435 4.05314 9.75008 3.88196 10.3092L3.11296 12.8207C2.71416 14.1232 4.22167 15.1704 5.30301 14.342L7.14861 12.9281C7.65097 12.5432 8.34903 12.5432 8.85139 12.9281L10.6807 14.3295C11.7636 15.159 13.2725 14.1079 12.8696 12.8046L12.09 10.2827C11.9159 9.71975 12.113 9.10809 12.5829 8.75263L14.673 7.17173Z"
-              fill="#D3D3D3"
-            />
-          </svg>{" "}
-        </div>
-        <p className="mr-3 text-base text-[#808080] font-medium ml-2">(88)</p>
-      </div>
-      <div className="flex items-center">
-        <div className="w-[24px] h-[24px] rounded-full p-[2px] border border-black mr-2">
-          <div className="bg-purple-500 w-full h-full rounded-full"></div>
-        </div>{" "}
-        <div className="w-[24px] h-[24px] rounded-full p-[2px] border border-black">
-          <div className="bg-red-500 w-full h-full rounded-full"></div>
+          </svg>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default ProductCard;
