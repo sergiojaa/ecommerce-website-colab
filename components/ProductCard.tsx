@@ -3,6 +3,8 @@ import React from "react";
 interface Product {
   id: number;
   title: string;
+  name: string;
+
   price: number;
   description: string;
   image: string;
@@ -21,7 +23,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <div className="group cursor-pointer ">
       <div className="relative">
-        <img className="mb-4" src={product.image} alt={product.title} />
+        <img
+          className="mb-4 h-[250px]"
+          src={product.image}
+          alt={product.title}
+        />
         <p className="invisible group-hover:visible transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:bg-black absolute bottom-0 w-full bg-black text-white text-center text-base font-medium p-2 border-t-0 border-r-0 rounded-bl-lg rounded-br-lg">
           Add To Cart
         </p>
@@ -64,7 +70,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </div>
       </div>
 
-      <p className="mb-2 text-base font-medium text-left">{product.title}</p>
+      <p className="mb-2 text-base font-medium text-left">{product.name}</p>
 
       <div className="flex mb-2 text-base">
         <p className="mr-3 text-base text-[#DB4444] font-medium">
