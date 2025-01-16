@@ -1,6 +1,44 @@
-import React from "react";
+"use client"; // კომპონენტი, რომელიც შესრულდება მხოლოდ კლიენტზე
+
+import React, { useState, useEffect } from "react";
 import ProductCard from "./ProductCard";
+
 export default function TopProducts() {
+  const [posts, setPosts] = useState<any[]>([]); // ინახავს გადმოწეულ მონაცემებს
+  const [loading, setLoading] = useState(true); // დატვირთვის მდგომარეობა
+  const [error, setError] = useState<string | null>(null); // შეცდომის მდგომარეობა
+
+  useEffect(() => {
+    // მონაცემების ასინქრონულად წამოსაღებად ფუნქცია
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "https://geguchadzeadmin.pythonanywhere.com/products/products/"
+        );
+        if (!response.ok) {
+          throw new Error("API გადახდა!");
+        }
+        const data = await response.json();
+        setPosts(data); // ასახავს მიღებულ მონაცემებს
+      } catch (error: any) {
+        setError(error.message); // შეცდომის შეტყობინება
+      } finally {
+        setLoading(false); // დატვირთვა დასრულებულია
+      }
+    };
+
+    fetchData(); // მონაცემების წამოსაღებად
+  }, []); // გამოძახება კომპონენტის დატვირთვისას
+
+  // დატვირთვისა და შეცდომის შეტყობინების დამუშავება
+  if (loading) {
+    return <div>დატვირთვა...</div>;
+  }
+
+  if (error) {
+    return <div>შეცდომა: {error}</div>;
+  }
+
   return (
     <div className="text-center mb-[140px]">
       <div className="flex justify-between items-end mb-[30px]">
@@ -20,10 +58,9 @@ export default function TopProducts() {
         </div>
       </div>
       <div className="grid grid-cols-4 gap-4">
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
+        {posts.slice(0, 4).map((product: any) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
       </div>
     </div>
   );

@@ -1,19 +1,35 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Grid, Navigation } from "swiper/modules";
 import ProductCard from "./ProductCard";
 
-interface ProductSliderProps {
-  rows: 1 | 2;
+interface Product {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  image: string;
 }
 
-const ProductSlider: React.FC<ProductSliderProps> = ({ rows }) => {
+interface ProductSliderProps {
+  rows: 1 | 2;
+  products: Product[];
+}
+
+const ProductSlider: React.FC<ProductSliderProps> = ({ rows, products }) => {
   const [isLastSlide, setIsLastSlide] = useState(false);
   const [isFirstSlide, setIsFirstSlide] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
-  // Create refs for each swiper
+  // Refs and effect should be outside any conditional rendering
   const swiperRef = useRef<any>(null);
+
+  // If you're fetching the products, ensure proper handling here
+  useEffect(() => {
+    setLoading(false);
+  }, [products]);
 
   const handleSlideChange = (swiper: any) => {
     if (swiper.isEnd) {
@@ -28,6 +44,16 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ rows }) => {
       setIsFirstSlide(false);
     }
   };
+
+  // Check if products are empty or unavailable
+  if (loading)
+    return <div className="text-center text-gray-700">Loading...</div>;
+  if (error)
+    return <div className="text-center text-red-500">Error: {error}</div>;
+  if (!products || products.length === 0)
+    return (
+      <div className="text-center text-gray-700">No products available</div>
+    );
 
   return (
     <div className="text-center mb-[80px]">
@@ -106,9 +132,9 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ rows }) => {
         className="mb-[60px]"
         ref={swiperRef}
       >
-        {[...Array(30)].map((_, index) => (
-          <SwiperSlide key={index}>
-            <ProductCard />
+        {products.map((product) => (
+          <SwiperSlide key={product.id}>
+            <ProductCard product={product} />
           </SwiperSlide>
         ))}
       </Swiper>
