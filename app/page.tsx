@@ -11,7 +11,7 @@ export default function Home() {
 
   return (
     <div style={{ maxWidth: "1170px", margin: "auto", marginTop: "150px" }}>
-      {/* <TopProducts /> */}
+      <TopProducts />
       <ProductSlider rows={1} products={productData} />
       <ProductSlider rows={2} products={productData} />
     </div>
