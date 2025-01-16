@@ -1,7 +1,10 @@
 "use client";
 import ProductSlider from "@/components/ProductSlider"; // კომპონენტის სწორი იმპორტი
+import Service from "@/components/Service";
 import TopProducts from "@/components/TopProducts";
 import useFetchProducts from "@/useFetchProducts"; // ჰუკის იმპორტი
+import NewArrival from "@/components/NewArrival";
+import Boost from "@/components/Boost";
 
 export default function Home() {
   const { productData, loading, error } = useFetchProducts(); // მონაცემების მიღება ჰუკიდან
@@ -11,9 +14,12 @@ export default function Home() {
 
   return (
     <div style={{ maxWidth: "1170px", margin: "auto", marginTop: "150px" }}>
+      <Boost />
+      <NewArrival />
       <TopProducts />
       <ProductSlider rows={1} products={productData} />
       <ProductSlider rows={2} products={productData} />
+      <Service />
     </div>
   );
 }
