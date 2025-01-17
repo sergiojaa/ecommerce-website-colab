@@ -1,35 +1,32 @@
-"use client"; // აუცილებელია
+"use client"; // აუცილებელია Client Component-ში გამოყენებისთვის
 
 import { useState, useEffect } from "react";
 
-const useFetchProducts = () => {
-  const [productData, setProductData] = useState<any[]>([]); // პროდუქციის მონაცემები
-  const [loading, setLoading] = useState(true); // თუ დაველოდებით მონაცემების დატვირთვას
-  const [error, setError] = useState<string | null>(null); // შეცდომა
+const useFetchProducts = (apiUrl: string) => {
+  const [productData, setProductData] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // აქ ხდება API-ს გაზრდა
     const fetchProductData = async () => {
       try {
-        const response = await fetch(
-          "https://geguchadzeadmin.pythonanywhere.com/products/products/"
-        ); // fakestoreapi.com-დან მონაცემების მიღება
+        const response = await fetch(apiUrl);
         if (!response.ok) {
           throw new Error("Failed to fetch products");
         }
         const data = await response.json();
-        setProductData(data); // აქ გსურთ მონაცემების დაწერა
+        setProductData(data);
       } catch (error) {
-        setError("Failed to load products"); // თუ მოხდა შეცდომა
+        setError("Failed to load products");
       } finally {
-        setLoading(false); // დაიწია მონაცემების დატვირთვის პროცესი
+        setLoading(false);
       }
     };
 
     fetchProductData();
-  }, []); // მხოლოდ ერთხელ დავამთავრებთ ამ პროცესს
+  }, [apiUrl]);
 
-  return { productData, loading, error }; // ვაბრუნებთ მონაცემებს
+  return { productData, loading, error };
 };
 
 export default useFetchProducts;
