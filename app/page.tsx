@@ -7,6 +7,7 @@ import NewArrival from "@/components/NewArrival";
 import Boost from "@/components/Boost";
 import CategorySlider from "@/components/CategorySlider";
 import useFetchProducts from "@/useFetchProducts";
+import HiroBanner from "@/components/HiroBanner";
 
 export default function Home() {
   const {
@@ -38,6 +39,7 @@ export default function Home() {
 
   return (
     <div style={{ maxWidth: "1170px", margin: "auto", marginTop: "150px" }}>
+      <HiroBanner />
       <ProductSlider rows={1} products={productData1} />
       <CategorySlider />
       <NewArrival />
