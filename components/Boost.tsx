@@ -1,23 +1,27 @@
 import React from "react";
 import Image from "next/image";
 import ServiceFrameImage from "../images/Frame694.png";
-
+import CountdownTimer from "./CountDownTimer";
 export default function Boost() {
   return (
-    <div className="flex justify-between items-stretch w-full p-4 bg-black mb-[70px] min-h-screen">
-      <div className="flex flex-col justify-between flex-1">
-        <p className="text-white">Categories</p>
-        <p className="text-white">Enhance Your Music Experience</p>
-        <p className="text-white">24:24</p>
-        <button className="text-white">Buy Now!</button>
+    <div className="flex justify-between items-stretch gap-[30px] w-full p-[56px] bg-black mb-[70px] ">
+      <div className="flex flex-col justify-center items-start">
+        <p className="text-[#47B486] text-base font-semibold mb-[32px]">
+          Categories
+        </p>
+        <p className="text-white text-[48px] font-semibold mb-[32px]">
+          Enhance Your Music Experience
+        </p>
+        <CountdownTimer />
+        <button className="bg-[#00FF66] text-white py-[16px] px-[48px] rounded mt-[40px] text-base font-semibold ">
+          Buy Now!
+        </button>
       </div>
-      <div className="flex-1">
-        <Image
-          src={ServiceFrameImage}
-          alt="logo"
-          className="object-contain w-full h-auto"
-        />
-      </div>
+      <Image
+        src={ServiceFrameImage}
+        alt="logo"
+        className="object-contain w-full h-auto"
+      />
     </div>
   );
 }
