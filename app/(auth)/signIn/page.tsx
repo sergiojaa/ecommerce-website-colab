@@ -6,6 +6,7 @@ import { useState } from 'react';
 import axios from 'axios';
 
 export default function SignIn() {
+
   const router = useRouter();
   const [user, setUser] = useState({
     email_or_phone: '',
@@ -49,7 +50,7 @@ export default function SignIn() {
         password: user.password,
       })
       .then((res) => {
-        localStorage.setItem('token', res.data);
+        localStorage.setItem('token', res.data.access);
         router.push('/');
         console.log(res.data);
       })
