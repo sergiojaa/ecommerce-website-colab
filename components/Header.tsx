@@ -7,35 +7,35 @@ import Link from 'next/link';
 
 export default function Header() {
     const [active, setActive] = useState('Home');
-    
+
     const handleClick = (page: string) => {
         setActive(page);
     };
 
     return (
         <div  >
-            <div className="flex w-[1080px] mx-auto items-center items-center justify-around text-center mt-5">
+            <div className="flex w-[1080px] mx-auto items-center items-center justify-between text-center mt-5">
                 <div>
                     <Link href={'/'}>
-                    <Image
-                         onClick={() => handleClick('Home')}
+                        <Image
+                            onClick={() => handleClick('Home')}
 
-                        src="/Exclusive.png"
-                        width={118}
-                        height={24}
-                        alt="logo"
-                    /></Link>
-                   
+                            src="/Exclusive.png"
+                            width={118}
+                            height={24}
+                            alt="logo"
+                        /></Link>
+
                 </div>
                 <div>
                     <ul className="flex items-center gap-10 cursor-pointer">
                         <Link href="/">
-                                <li
-                                    className={active === 'Home' ? 'border-b-2 border-black' : ''}
-                                    onClick={() => handleClick('Home')}
-                                >
-                                    Home
-                                </li>
+                            <li
+                                className={active === 'Home' ? 'border-b-2 border-black' : ''}
+                                onClick={() => handleClick('Home')}
+                            >
+                                Home
+                            </li>
                         </Link>
                         <Link href="/contact">
                             <li
@@ -46,22 +46,22 @@ export default function Header() {
                             </li>
                         </Link>
 
-                   <Link href={'/about'}>
-                   <li
-                            className={active === 'About' ? 'border-b-2 border-black' : ''}
-                            onClick={() => handleClick('About')}
-                        >
-                            About
-                        </li>
-                   </Link>
-                       
+                        <Link href={'/about'}>
+                            <li
+                                className={active === 'About' ? 'border-b-2 border-black' : ''}
+                                onClick={() => handleClick('About')}
+                            >
+                                About
+                            </li>
+                        </Link>
+
                         <Link href="/SignUp">
-                                <li
-                                    className={active === 'Sign Up' ? 'border-b-2 border-black' : ''}
-                                    onClick={() => handleClick('Sign Up')}
-                                >
-                                    Sign Up
-                                </li>
+                            <li
+                                className={active === 'Sign Up' ? 'border-b-2 border-black' : ''}
+                                onClick={() => handleClick('Sign Up')}
+                            >
+                                Sign Up
+                            </li>
                         </Link>
                     </ul>
                 </div>
@@ -77,6 +77,26 @@ export default function Header() {
                             icon={faMagnifyingGlass}
                             style={{ color: "#000000" }}
                         />
+                    </div>
+                </div>
+                <div className='flex items-center gap-3' >
+                    <div className='cursor-pointer'>
+                        <Link href={'/wishlist'}>
+                            <Image src='/Wishlist.png' width={30} height={50} alt='wishlist image' />
+
+                        </Link>
+                    </div>
+                    <div className='cursor-pointer'>
+                        <Link href={'/cart'}>
+                            <Image src='/Cart1.png' width={30} height={50} alt='cart image' />
+
+                        </Link>
+                    </div>
+                    <div className='cursor-pointer'>
+                        <Link href={'/account'}>
+                            <Image src='/user.png' width={30} height={50} alt='cart image' />
+
+                        </Link>
                     </div>
                 </div>
             </div>
