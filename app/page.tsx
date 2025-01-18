@@ -33,7 +33,12 @@ export default function Home() {
     "https://geguchadzeadmin.pythonanywhere.com/products/best-sellers/"
   );
 
-  if (loading1 || loading2 || loading3) return <div>დატვირთვა...</div>;
+  if (loading1 || loading2 || loading3)
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="w-16 h-16 border-4 border-t-4 border-gray-300 rounded-full animate-spin border-t-blue-500"></div>
+      </div>
+    );
   if (error1 || error2 || error3)
     return <div>შეცდომა: {error1 || error2 || error3}</div>;
 
