@@ -1,4 +1,6 @@
+import axios from "axios";
 import React from "react";
+import { useRouter } from "next/navigation";
 
 interface Product {
   id: number;
@@ -15,9 +17,33 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const router = useRouter()
+
   // Проверка, что product существует перед его использованием
   if (!product) {
     return <div>Product data is unavailable.</div>;
+  }
+  const addToCart = () => {
+    const token = localStorage.getItem('token')
+    if (!token) {
+      return router.push('/SignIn')
+    }
+
+    axios.post(
+      'https://geguchadzeadmin.pythonanywhere.com/cart/cart-items/',
+      {
+        'quantity': 1,
+        'product': product.id,
+        'cart': 1
+      },
+      { headers: { Authorization: `Bearer ${token}` } } // Headers as a separate argument
+    )
+      .then((res) => {
+        console.log(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   return (
@@ -28,7 +54,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           src={product.image}
           alt={product.title}
         />
-        <p className="invisible group-hover:visible transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:bg-black absolute bottom-0 w-full bg-black text-white text-center text-base font-medium p-2 border-t-0 border-r-0 rounded-bl-lg rounded-br-lg">
+        <p
+          onClick={addToCart}
+          className="invisible group-hover:visible transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:bg-black absolute bottom-0 w-full bg-black text-white text-center text-base font-medium p-2 border-t-0 border-r-0 rounded-bl-lg rounded-br-lg">
           Add To Cart
         </p>
         <p className="absolute top-[12px] left-[12px] bg-[#DB4444] text-white text-3 px-3 py-1 rounded cursor-pointer">
