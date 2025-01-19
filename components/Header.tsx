@@ -2,15 +2,32 @@
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function Header() {
+    const router = useRouter()
     const [active, setActive] = useState('Home');
+    const [isAuthed, setIsAuthed] = useState(false)
+
 
     const handleClick = (page: string) => {
         setActive(page);
     };
+
+    useEffect(() => {
+        const token = localStorage.getItem('token')
+        console.log(token)
+
+        if (token) {
+            setIsAuthed(true)
+        } else {
+            setIsAuthed(false)
+        }
+
+
+    }, [])
 
     return (
         <div  >
@@ -55,12 +72,15 @@ export default function Header() {
                             </li>
                         </Link>
 
-                        <Link href="/SignUp">
+                        <Link
+
+                            href={isAuthed ? '/account' : `/SignUp`}
+                        >
                             <li
                                 className={active === 'Sign Up' ? 'border-b-2 border-black' : ''}
                                 onClick={() => handleClick('Sign Up')}
                             >
-                                Sign Up
+                                {isAuthed ? 'Account' : 'Sign Up'}
                             </li>
                         </Link>
                     </ul>
