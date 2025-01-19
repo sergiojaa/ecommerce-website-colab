@@ -19,22 +19,22 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const router = useRouter()
 
-  // Проверка, что product существует перед его использованием
   if (!product) {
     return <div>Product data is unavailable.</div>;
   }
-  const addToCart = () => {
+  const addToCart = (user: number | React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
     const token = localStorage.getItem('token')
     if (!token) {
       return router.push('/SignIn')
     }
+
 
     axios.post(
       'https://geguchadzeadmin.pythonanywhere.com/cart/cart-items/',
       {
         'quantity': 1,
         'product': product.id,
-        'cart': 1
+        'cart': user.id
       },
       { headers: { Authorization: `Bearer ${token}` } } // Headers as a separate argument
     )
@@ -55,7 +55,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           alt={product.title}
         />
         <p
-          onClick={addToCart}
+          onClick={() => addToCart(1)}
           className="invisible group-hover:visible transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:bg-black absolute bottom-0 w-full bg-black text-white text-center text-base font-medium p-2 border-t-0 border-r-0 rounded-bl-lg rounded-br-lg">
           Add To Cart
         </p>
