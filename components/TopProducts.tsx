@@ -1,7 +1,7 @@
 "use client";
 
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 
 export default function TopProducts() {
@@ -65,4 +65,3 @@ export default function TopProducts() {
   );
 };
 
-export default TopProducts;
