@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+
+import React from "react";
 import ProductCard from "./ProductCard";
 
 export default function TopProducts() {
@@ -47,11 +48,11 @@ export default function TopProducts() {
           </div>
           <div className="flex justify-between items-center w-full">
             <p className="mr-[86px] text-4xl font-semibold">
-              Best Selling Products{" "}
+              Best Selling Products
             </p>
             <p className="inline-block bg-[#DB4444] py-4 px-[48px] text-3 text-base font-medium text-white">
               View All
-            </p>{" "}
+            </p>
           </div>
         </div>
       </div>
@@ -62,4 +63,6 @@ export default function TopProducts() {
       </div>
     </div>
   );
-}
+};
+
+export default TopProducts;
