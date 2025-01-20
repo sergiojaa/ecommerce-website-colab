@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface Product {
   id: number;
@@ -33,10 +34,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       'https://geguchadzeadmin.pythonanywhere.com/cart/cart-items/',
       {
         'quantity': 1,
-        'product': product.id,
-        'cart': user.id
+        'product': product.id
       },
-      { headers: { Authorization: `Bearer ${token}` } } // Headers as a separate argument
+      { headers: { Authorization: `Bearer ${token}` } }
     )
       .then((res) => {
         console.log(res.data)
@@ -49,11 +49,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <div className="group cursor-pointer ">
       <div className="relative">
-        <img
-          className="mb-4 h-[250px]"
-          src={product.image}
-          alt={product.title}
-        />
+        <Link href={`/products/${product.id}`}>
+          <img
+            className="mb-4 h-[250px]"
+            src={product.image}
+            alt={product.title}
+          />
+        </Link>
+
         <p
           onClick={() => addToCart(1)}
           className="invisible group-hover:visible transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:bg-black absolute bottom-0 w-full bg-black text-white text-center text-base font-medium p-2 border-t-0 border-r-0 rounded-bl-lg rounded-br-lg">

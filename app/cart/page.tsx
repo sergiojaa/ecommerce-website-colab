@@ -6,11 +6,7 @@ import { useEffect, useState } from "react"
 
 export default function cart() {
     const router = useRouter()
-    const [products, setProducts] = useState([])
-    const [price, setPrice] = useState(0);
-    const [totalItems, setTotalItems] = useState(0);
-    const [loading, setLoading] = useState(true);
-    const [loadingProductId, setLoadingProductId] = useState<string | null>(null);
+    const [products, setProducts] = useState<{ quantity: number, product: number }[]>([])
 
     const getCartItems = (token: string) => {
 
@@ -22,6 +18,7 @@ export default function cart() {
             }
         )
             .then((res) => {
+                console.log(res.data)
                 setProducts(res.data)
             })
             .catch((err) => {
@@ -42,12 +39,14 @@ export default function cart() {
     return (
         <div>
             <div>
-                {/* map here */}
+                {products?.map((product, index) => (
+                    <div key={index}>
+                        {product.product}
+                        {product.quantity}
+                    </div>
+                ))}
             </div>
         </div>
     )
 }
 
-function checkTokenValidity(arg0: string) {
-    throw new Error("Function not implemented.");
-}

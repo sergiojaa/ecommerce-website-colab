@@ -1,15 +1,14 @@
-"use client"; // კომპონენტი, რომელიც შესრულდება მხოლოდ კლიენტზე
+"use client";
 
 import React, { useState, useEffect } from "react";
 import ProductCard from "./ProductCard";
 
 export default function TopProducts() {
-  const [posts, setPosts] = useState<any[]>([]); // ინახავს გადმოწეულ მონაცემებს
-  const [loading, setLoading] = useState(true); // დატვირთვის მდგომარეობა
-  const [error, setError] = useState<string | null>(null); // შეცდომის მდგომარეობა
+  const [posts, setPosts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // მონაცემების ასინქრონულად წამოსაღებად ფუნქცია
     const fetchData = async () => {
       try {
         const response = await fetch(
@@ -19,18 +18,17 @@ export default function TopProducts() {
           throw new Error("API გადახდა!");
         }
         const data = await response.json();
-        setPosts(data); // ასახავს მიღებულ მონაცემებს
+        setPosts(data);
       } catch (error: any) {
-        setError(error.message); // შეცდომის შეტყობინება
+        setError(error.message);
       } finally {
-        setLoading(false); // დატვირთვა დასრულებულია
+        setLoading(false);
       }
     };
 
-    fetchData(); // მონაცემების წამოსაღებად
-  }, []); // გამოძახება კომპონენტის დატვირთვისას
+    fetchData();
+  }, []);
 
-  // დატვირთვისა და შეცდომის შეტყობინების დამუშავება
   if (loading) {
     return <div>დატვირთვა...</div>;
   }

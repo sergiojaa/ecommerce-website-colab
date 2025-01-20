@@ -1,4 +1,20 @@
+'use client'
+import axios from "axios"
+import { useRouter } from "next/navigation"
+import { useEffect } from "react"
+
 export default function account() {
+    // useEffect(() => {
+    //     axios.get('https://geguchadzeadmin.pythonanywhere.com/accounts/address/')
+    //         .then((res) => console.log(res))
+    //         .catch(err => console.log(err))
+    // }, [])
+    const router = useRouter()
+    const deleteStorage = () => {
+        localStorage.removeItem('token')
+        router.push('/')
+
+    }
     return (
         <div className="relative  mb-40 flex items-center justify-center h-screen">
             <div className="absolute left-16 top-16 ml-5">
@@ -52,7 +68,7 @@ export default function account() {
                             </div>
                             <div>
                                 <div className="flex items-center mt-10  gap-3 justify-end">
-                                    <p className="cursor-pointer text-[18px]">cancel</p>
+                                    <p onClick={deleteStorage} className="cursor-pointer text-[18px]">log out</p>
                                     <button className=" py-3 rounded-md text-white px-10 bg-red-500">Save changes</button>
                                 </div>
                             </div>
