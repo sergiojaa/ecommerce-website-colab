@@ -43,12 +43,12 @@ export default function Home() {
     return <div>შეცდომა: {error1 || error2 || error3}</div>;
 
   return (
-    <div style={{ maxWidth: "1170px", margin: "auto", marginTop: "150px" }}>
-      <div className="grid grid-cols-12 gap-[45px] mb-[140px]">
-        <div className="col-span-3 border-r border-[#D3D3D3]">
+    <div style={{ maxWidth: "1170px", margin: "auto" }}>
+      <div className="grid grid-cols-12 gap-[45px] mb-[140px] ">
+        <div className="col-span-3 border-r border-[#D3D3D3] pt-[40px]">
           <CategoriesComponent />
         </div>
-        <div className="col-span-9">
+        <div className="col-span-9 pt-[40px]">
           <HiroBanner />
         </div>
       </div>

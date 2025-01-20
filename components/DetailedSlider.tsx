@@ -5,11 +5,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/free-mode";
-import "swiper/css/navigation";
 import "swiper/css/thumbs";
 
 // import required modules
-import { FreeMode, Navigation, Thumbs } from "swiper/modules";
+import { FreeMode, Thumbs } from "swiper/modules";
 
 const DetailedSlider = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
@@ -25,7 +24,7 @@ const DetailedSlider = () => {
             slidesPerView={4} /* სამი სლაიდი ვერტიკალურად */
             freeMode={true}
             watchSlidesProgress={true}
-            modules={[FreeMode, Navigation, Thumbs]}
+            modules={[FreeMode, Thumbs]}
             direction="vertical" /* ვერტიკალური განლაგება */
             className="mySwiper detailed-swiper overflow-hidden"
             style={{ maxHeight: "560px" }} /* კონტეინერის სიმაღლე */
@@ -71,9 +70,8 @@ const DetailedSlider = () => {
             // }}
             loop={true}
             spaceBetween={10}
-            navigation={true}
             thumbs={{ swiper: thumbsSwiper }}
-            modules={[FreeMode, Navigation, Thumbs]}
+            modules={[FreeMode, Thumbs]}
             className="mySwiper2"
           >
             <SwiperSlide>
