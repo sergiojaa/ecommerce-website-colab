@@ -11,3 +11,15 @@
   height: 950px;
   background-color: #f5f5f5;
 } */
+
+.detailed-swiper {
+  .swiper-wrapper {
+    gap: 16px;
+
+    .swiper-slide {
+      gap: 16px;
+      height: auto !important;
+      margin-bottom: 0 !important;
+    }
+  }
+}
