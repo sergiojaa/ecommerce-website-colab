@@ -9,8 +9,8 @@ export default function detailed() {
   );
   return (
     <>
-      <div className="grid grid-cols-12 gap-2 max-w-[1170px] mx-auto mb-[140px]">
-        <div className="col-span-8 bg-lightblue p-4 text-center">
+      <div className="grid grid-cols-12 gap-[70px] max-w-[1170px] mx-auto mb-[140px]">
+        <div className="col-span-8 bg-lightblue text-center">
           <DetailedSlider />
         </div>
         <div className="col-span-4 bg-lightblue p-4 text-center">

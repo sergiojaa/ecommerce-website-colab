@@ -16,19 +16,19 @@ const DetailedSlider = () => {
 
   return (
     <>
-      <div className="grid grid-cols-8 gap-2">
-        <div className="col-span-6 bg-lightblue p-4 text-center">
+      <div className="grid grid-cols-8 gap-[30px]">
+        <div className="col-span-2 bg-lightblue text-center">
           <Swiper
-            // style={{
-            //   "--swiper-navigation-color": "#fff",
-            //   "--swiper-pagination-color": "#fff",
-            // }}
+            onSwiper={setThumbsSwiper}
             loop={true}
             spaceBetween={10}
-            navigation={true}
-            thumbs={{ swiper: thumbsSwiper }}
+            slidesPerView={4} /* სამი სლაიდი ვერტიკალურად */
+            freeMode={true}
+            watchSlidesProgress={true}
             modules={[FreeMode, Navigation, Thumbs]}
-            className="mySwiper2"
+            direction="vertical" /* ვერტიკალური განლაგება */
+            className="mySwiper detailed-swiper overflow-hidden"
+            style={{ maxHeight: "560px" }} /* კონტეინერის სიმაღლე */
           >
             <SwiperSlide>
               <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
@@ -63,16 +63,18 @@ const DetailedSlider = () => {
           </Swiper>
         </div>
 
-        <div className="col-span-2 bg-lightblue p-4 text-center">
+        <div className="col-span-6 bg-lightblue text-center">
           <Swiper
-            onSwiper={setThumbsSwiper}
+            // style={{
+            //   "--swiper-navigation-color": "#fff",
+            //   "--swiper-pagination-color": "#fff",
+            // }}
             loop={true}
             spaceBetween={10}
-            slidesPerView={4}
-            freeMode={true}
-            watchSlidesProgress={true}
+            navigation={true}
+            thumbs={{ swiper: thumbsSwiper }}
             modules={[FreeMode, Navigation, Thumbs]}
-            className="mySwiper"
+            className="mySwiper2"
           >
             <SwiperSlide>
               <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
