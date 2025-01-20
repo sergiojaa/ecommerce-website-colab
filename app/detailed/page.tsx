@@ -4,9 +4,11 @@ import ProductSlider from "@/components/ProductSlider";
 import React, { useState } from "react";
 import useFetchProducts from "@/useFetchProducts";
 export default function detailed() {
+
   const { productData: productData2 } = useFetchProducts(
     "https://geguchadzeadmin.pythonanywhere.com/products/best-sellers/"
   );
+
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
 
@@ -63,9 +65,8 @@ export default function detailed() {
                     <button
                       key={size}
                       onClick={() => setSelectedSize(size)}
-                      className={`px-2 py-1 border border-gray-300 rounded-md ${
-                        selectedSize === size ? "bg-red-500 text-white" : ""
-                      }`}
+                      className={`px-2 py-1 border border-gray-300 rounded-md ${selectedSize === size ? "bg-red-500 text-white" : ""
+                        }`}
                     >
                       {size}
                     </button>
