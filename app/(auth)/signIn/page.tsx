@@ -1,25 +1,24 @@
-'use client';
-import Image from 'next/image';
-import Link from 'next/navigation';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import axios from 'axios';
+"use client";
+import Image from "next/image";
+import Link from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import axios from "axios";
 
 export default function SignIn() {
-
   const router = useRouter();
   const [user, setUser] = useState({
-    email_or_phone: '',
-    password: '',
+    email_or_phone: "",
+    password: "",
   });
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const inputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
-    setError('');
+    setError("");
 
-    if (name === 'email_or_phone') {
+    if (name === "email_or_phone") {
       if (/^\d+$/.test(value)) {
         setUser((prevUser) => ({
           ...prevUser,
@@ -42,25 +41,25 @@ export default function SignIn() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    setError('');
+    setError("");
 
     axios
-      .post('https://geguchadzeadmin.pythonanywhere.com/accounts/login/', {
+      .post("https://geguchadzeadmin.pythonanywhere.com/accounts/login/", {
         email_or_phone: user.email_or_phone,
         password: user.password,
       })
       .then((res) => {
-        localStorage.setItem('token', res.data.access);
-        router.push('/');
+        localStorage.setItem("token", res.data.access);
+        router.push("/");
         console.log(res.data);
       })
       .catch((err) => {
-        setError(err.response?.data?.message || 'An error occurred');
+        setError(err.response?.data?.message || "An error occurred");
       });
   };
 
   return (
-    <div className="flex mt-10 w-[1300px] mx-auto">
+    <div className="flex mt-[60px] w-[1300px] mx-auto">
       <div className="flex flex-1 items-start justify-start">
         <Image src="/signUp.png" width={690} height={81} alt="logo" />
       </div>

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import Image from "next/image";
@@ -76,7 +76,10 @@ export default function SignUp() {
     };
 
     axios
-      .post("https://geguchadzeadmin.pythonanywhere.com/accounts/register/", data)
+      .post(
+        "https://geguchadzeadmin.pythonanywhere.com/accounts/register/",
+        data
+      )
       .then((response) => {
         console.log("Registration successful", response.data);
         router.push("/SignIn");
@@ -88,7 +91,7 @@ export default function SignUp() {
   };
 
   return (
-    <div className="flex mt-10 w-[1300px] mx-auto">
+    <div className="flex mt-[60] w-[1300px] mx-auto">
       <div className="flex flex-1 items-start justify-start">
         <Image src="/signUp.png" width={690} height={81} alt="logo" />
       </div>
