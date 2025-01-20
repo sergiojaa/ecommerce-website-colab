@@ -1,16 +1,43 @@
-// TopProducts.tsx
+"use client";
 
-"use client"; // კომპონენტი, რომელიც შესრულდება მხოლოდ კლიენტზე
 
 import React from "react";
 import ProductCard from "./ProductCard";
 
-// TopProducts კომპონენტი იღებს products პროპს
-interface TopProductsProps {
-  products: any[]; // თუ საჭირო იქნება, შეიძლება ზუსტად განსაზღვრო პროდუქტის სტრუქტურა
-}
+export default function TopProducts() {
+  const [posts, setPosts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-const TopProducts: React.FC<TopProductsProps> = ({ products }) => {
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "https://geguchadzeadmin.pythonanywhere.com/products/products/"
+        );
+        if (!response.ok) {
+          throw new Error("API გადახდა!");
+        }
+        const data = await response.json();
+        setPosts(data);
+      } catch (error: any) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <div>დატვირთვა...</div>;
+  }
+
+  if (error) {
+    return <div>შეცდომა: {error}</div>;
+  }
+
   return (
     <div className="text-center mb-[140px]">
       <div className="flex justify-between items-end mb-[30px]">
@@ -30,7 +57,7 @@ const TopProducts: React.FC<TopProductsProps> = ({ products }) => {
         </div>
       </div>
       <div className="grid grid-cols-4 gap-4">
-        {products.slice(0, 4).map((product: any) => (
+        {posts.slice(0, 4).map((product: any) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
