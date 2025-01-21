@@ -3,7 +3,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-interface Product {
+export interface Product {
   id: number;
   title: string;
   name: string;
@@ -49,7 +49,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <div className="group cursor-pointer ">
       <div className="relative">
-        <Link href={`/products/${product.id}`}>
+        <Link href={`/product?id=${product.id}`}>
           <img
             className="mb-4 h-[250px]"
             src={product.image}
