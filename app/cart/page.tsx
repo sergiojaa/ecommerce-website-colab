@@ -43,7 +43,6 @@ export default function cart() {
                     <div key={index}>
                         <h1 className="bg-red-500">
                             {product.quantity}
-
                         </h1>
                     </div>
                 ))}
