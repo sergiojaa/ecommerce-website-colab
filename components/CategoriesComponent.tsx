@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 interface Category {
@@ -36,7 +37,7 @@ const CategoriesComponent: React.FC = () => {
     <ul className="flex flex-col justify-between h-full">
       {categories.map((category) => (
         <li className="font-normal text-base" key={category.id}>
-          {category.name}
+          <Link href={`/category/${category.id}`}>{category.name}</Link>
         </li>
       ))}
     </ul>
