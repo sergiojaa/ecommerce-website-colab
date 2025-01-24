@@ -3,10 +3,16 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 
 import { useEffect, useState } from "react"
+type Products = {
+    product_name: string;
+    quantity: number;
+    product: number;
+    order: number;
 
+}
 export default function cart() {
     const router = useRouter()
-    const [products, setProducts] = useState<{ quantity: number, product: number }[]>([])
+    const [products, setProducts] = useState<Products[]>([])
 
     const getCartItems = (token: string) => {
 
@@ -41,9 +47,13 @@ export default function cart() {
             <div>
                 {products?.map((product, index) => (
                     <div key={index}>
-                        <h1 className="bg-red-500">
+                        <div className="bg-red-500">
+                            <h2 className="bg-yellow-500">
+                                {product.quantity}
 
-                        </h1>
+                            </h2>
+                            {product.product}
+                        </div>
                     </div>
                 ))}
             </div>
