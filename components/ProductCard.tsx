@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import detailed from "@/app/detailed/page";
 
 export interface Product {
   id: number;
@@ -14,7 +15,7 @@ export interface Product {
 }
 
 interface ProductCardProps {
-  product: Product | undefined; // product შესაძლოა იყოს undefined
+  product: Product | undefined;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
@@ -49,7 +50,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <div className="group cursor-pointer ">
       <div className="relative">
-        <Link href={`/product?id=${product.id}`}>
+        <Link href={`/detailed?id=${product.id}`}>
           <img
             className="mb-4 h-[250px]"
             src={product.image}

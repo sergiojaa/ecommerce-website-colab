@@ -72,7 +72,7 @@ export default function Page() {
                     />
                 </div>
                 <h2 className="bg-red-900 text-white text-lg font-bold p-2">
-                    {product.price} USD
+                    {product.price}usd
                 </h2>
             </div>
         </div>

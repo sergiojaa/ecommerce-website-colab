@@ -10,6 +10,7 @@ interface Product {
   price: number;
   description: string;
   image: string;
+  name: string
 }
 
 interface ProductSliderProps {
@@ -70,9 +71,8 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ rows, products }) => {
         </div>
         <div>
           <button
-            className={`custom-prev-${rows} rounded-full p-2 rotate-180 mr-2 ${
-              isFirstSlide ? "bg-none" : "bg-[#F5F5F5]"
-            }`}
+            className={`custom-prev-${rows} rounded-full p-2 rotate-180 mr-2 ${isFirstSlide ? "bg-none" : "bg-[#F5F5F5]"
+              }`}
             onClick={() => swiperRef.current?.swiper.slidePrev()}
           >
             <svg
@@ -92,9 +92,8 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ rows, products }) => {
             </svg>
           </button>
           <button
-            className={`custom-next-${rows} rounded-full p-2 ${
-              isLastSlide ? "bg-none" : "bg-[#F5F5F5]"
-            }`}
+            className={`custom-next-${rows} rounded-full p-2 ${isLastSlide ? "bg-none" : "bg-[#F5F5F5]"
+              }`}
             onClick={() => swiperRef.current?.swiper.slideNext()}
           >
             <svg

@@ -10,7 +10,7 @@ export default function cart() {
 
     const getCartItems = (token: string) => {
 
-        axios.get('https://geguchadzeadmin.pythonanywhere.com/cart/orders/1',
+        axios.get('https://geguchadzeadmin.pythonanywhere.com/cart/cart-items/',
             {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -42,7 +42,7 @@ export default function cart() {
                 {products?.map((product, index) => (
                     <div key={index}>
                         <h1 className="bg-red-500">
-                            {product.quantity}
+
                         </h1>
                     </div>
                 ))}
