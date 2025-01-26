@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# იქომერს საიტი
 
-## Getting Started
+ეს არის იქომერსიული ვებ-პლატფორმა, რომელიც შექმნილია **Next.js** და **TypeScript**-ზე. პროექტი არის **collaborative project** Algouni-ში, სადაც მე და ორი  სტუდენტი ვიმუშავეთ ფრონტ-ენდზე, ხოლო ერთი სტუდენტი დაკავებული იყო backend ნაწილზე.
 
-First, run the development server:
+## მახასიათებლები
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **რეგისტრაცია და ლოგინი**: მომხმარებლებს შეუძლიათ შექმნან ანგარიში და გაიარონ ავტორიზაცია.
+- **კარტი და უიშთლისტი**: მომხმარებლებს შეუძლიათ დაამატონ პროდუქტები კარტში და უიშთლისტში.
+- **ძებნა**: პროდუქტების მოძებნა საძიებო ველის გამოყენებით.
+- **დიზაინი**: საიტზე წარმოდგენილია ლამაზი დიზაინი.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## პროექტის შესახებ
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- ამ პროექტში შევიმუშავეთ **Next.js**-ზე, **TypeScript**-ის გამოყენებით, რაც მნიშვნელოვნად ამაღლებს კოდების უსაფრთხოებასა და სტრუქტურას.
+- გატესტილია **Git** და **GitHub**-ის გამოყენება, როგორც ვერსიების კონტროლისა და გუნდური მუშაობის საუკეთესო პრაქტიკა. შევისწავლეთ **ბრენჩინგი**, როგორ დავუმატოთ ახალი ფუნქციები და როგორ გადავჭრათ კონფლიქტის პრობლემები.
+- საიტი ჯერ სრულად დამუშავებულია მხოლოდ **Desktop** ვერსიისთვის, რადგან პროექტის **დედლაინი მხოლოდ ერთი კვირა** იყო. ფიგმას დიზაინში არ იყო მობილური და ტაბლეტ ვერსიები, რაზეც შევთანხმდით, რომ დაგვესრულებინა ის ფუნქციონალები და დიზაინი, რომელიც მოცემული იყო.
+- პროექტის შემდეგ ეტაპზე ვაპირებთ **რესპონსიული დიზაინის** გაუმჯობესებას, რათა საიტი სრულად იყოს მორგებული ყველა მოწყობილობას.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ტექნოლოგიები
 
-## Learn More
+- **Next.js**: ვებ აპლიკაციის შექმნისთვის.
+- **TypeScript**: კოდების ტიპების განსაზღვრა და უსაფრთხოება.
+- **Tailwind CSS**: საიტის სტილიზაციისთვის.
+- **Git/GitHub**: ვერსიების მართვა და გუნდური თანამშრომლობა.
 
-To learn more about Next.js, take a look at the following resources:
+## მიმდინარე მდგომარეობა
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- ამჟამად დასრულებულია **Desktop ვერსია**, თუმცა **responsiveness**-თან დაკავშირებით ჯერ კიდევ დარჩენილია სამუშაოები. 
+- საიტზე განხორციელებული ფუნქციები:
+  - მომხმარებლები რეგისტრირდებიან და იღებენ ლოგინს.
+  - პროდუქციის დამატება კარტსა და უიშთლისტში.
+  - საძიებო ფუნქცია.
+- **დახარჯული დრო**: პროექტისთვის ერთკვირიანი დროით ვიმუშავეთ. ახლა კი ვმუშაობთ რესპონსივზე
