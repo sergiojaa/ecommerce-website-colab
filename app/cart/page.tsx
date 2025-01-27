@@ -49,10 +49,11 @@ export default function cart() {
                     <div key={index}>
                         <div className="bg-red-500">
                             <h2 className="bg-yellow-500">
-                                {product.quantity}
-
+                                {product.product}
                             </h2>
-                            {product.product}
+                            {product.quantity}
+                            {product.product_name}
+                            {product.order}
                         </div>
                     </div>
                 ))}
