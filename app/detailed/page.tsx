@@ -46,7 +46,7 @@ export default function detailed() {
 
     const token = localStorage.getItem('token');
 
-    axios.get(`https://geguchadzeadmin.pythonanywhere.com/products/products/6/images/`, {
+    axios.get(`https://geguchadzeadmin.pythonanywhere.com/products/products/${id}/images/`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => {
@@ -64,23 +64,25 @@ export default function detailed() {
 
       <div className=" max-w-[1170px]   mx-auto">
         <p className="text-sm font-normal my-[80px]">Account</p>
-        <div className="flex">
-          <div className="grid grid-cols-12 gap-[70px] mb-[140px]">
-            {/* <div>
-              {slides.map((item, index) => (
-                <div className="w-[100px]" key={index}>
-                  <img className="w-[100px]" src={item.image} />
-                </div>
-              ))}
-            </div> */}
-            <div className="col-span-8 bg-lightblue text-center">
-              <img
-                className="mb-4 h-[250px]"
-                src={product?.image}
-                alt={product?.title}
-              />
+        <div >
+          <div className="flex">
+            <div className="grid grid-cols-12 gap-[70px] mb-[140px]">
+              <div>
+                {slides.map((item, index) => (
+                  <div className="w-[100px]" key={index}>
+                    <img className="w-[100px]" src={item.image} />
+                  </div>
+                ))}
+              </div>
+              <div className="col-span-8 bg-lightblue text-center">
+                <img
+                  className="mb-4 w-[500px] h-[350px]"
+                  src={product?.image}
+                  alt={product?.title}
+                />
 
 
+              </div>
             </div>
             <div className="col-span-4 bg-lightblue p-4 text-center">
               <div className="w-full text-left space-y-4">
