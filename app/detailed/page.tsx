@@ -8,13 +8,13 @@ import { Product } from "@/components/ProductCard";
 import axios from "axios";
 export default function detailed() {
   const searchParams = useSearchParams();
-  const id = searchParams.get('id');
+  const id = searchParams.get("id");
   const { productData: productData2 } = useFetchProducts(
     `https://geguchadzeadmin.pythonanywhere.com/products/best-sellers/`
   );
 
   const [product, setProduct] = useState<Product | null>(null);
-  const [slides, setSlides] = useState([])
+  const [slides, setSlides] = useState([]);
 
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
@@ -29,11 +29,15 @@ export default function detailed() {
   useEffect(() => {
     if (!id) return;
 
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
 
-    axios.get(`https://geguchadzeadmin.pythonanywhere.com/products/products/${id}/`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
+    axios
+      .get(
+        `https://geguchadzeadmin.pythonanywhere.com/products/products/${id}/`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         setProduct(res.data);
       })
@@ -44,14 +48,18 @@ export default function detailed() {
   useEffect(() => {
     if (!id) return;
 
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
 
-    axios.get(`https://geguchadzeadmin.pythonanywhere.com/products/products/${id}/images/`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
+    axios
+      .get(
+        `https://geguchadzeadmin.pythonanywhere.com/products/products/${id}/images/`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         setSlides(res.data);
-        console.log(res.data)
+        console.log(res.data);
       })
       .catch((err) => {
         console.error(err);
@@ -59,12 +67,10 @@ export default function detailed() {
   }, [id]);
 
   return (
-
-    <div >
-
+    <div>
       <div className=" max-w-[1170px]   mx-auto">
         <p className="text-sm font-normal my-[80px]">Account</p>
-        <div >
+        <div>
           <div className="flex">
             <div className="grid grid-cols-12 gap-[70px] mb-[140px]">
               <div>
@@ -76,28 +82,39 @@ export default function detailed() {
               </div>
               <div className="col-span-8 bg-lightblue text-center">
                 <img
-                  className="mb-4 w-[500px] h-[350px]"
+                  className="mb-4 w-[500px] h-[350px] bg-red-500"
                   src={product?.image}
                   alt={product?.title}
                 />
-
-
               </div>
             </div>
             <div className="col-span-4 bg-lightblue p-4 text-center">
               <div className="w-full text-left space-y-4">
-                <h1 className="text-2xl font-bold mb-[16px]">{product?.name}</h1>
+                <h1 className="text-2xl font-bold mb-[16px]">
+                  {product?.name}
+                </h1>
                 <div className="flex items-center gap-[16px] mb-[16px]">
                   <span className="text-yellow-500">★★★★★</span>
                   <span className="text-sm font-normal text-gray">
                     (59 Reviews)
                   </span>
-                  <p className="text-sm font-normal text-green-500">In Stock</p>
+                  <p
+                    className={`text-sm font-normal ${
+                      product && product.is_in_stock
+                        ? "text-green-500"
+                        : "text-red-500"
+                    }`}
+                  >
+                    {product && product.is_in_stock
+                      ? "In Stock"
+                      : "Out of Stock"}
+                  </p>
                 </div>
-                <p className="text-2xl font-normal mb-[24px]">{product?.price}</p>
+                <p className="text-2xl font-normal mb-[24px]">
+                  {product?.price}
+                </p>
                 <p className="text-sm font-normal text-gray mb-[24px]">
                   {product?.description}
-
                 </p>
                 <hr className="mb-[24px]" />
                 {/* Colors */}
@@ -116,8 +133,9 @@ export default function detailed() {
                     <button
                       key={size}
                       onClick={() => setSelectedSize(size)}
-                      className={`px-2 py-1 border border-gray-300 rounded-md ${selectedSize === size ? "bg-red-500 text-white" : ""
-                        }`}
+                      className={`px-2 py-1 border border-gray-300 rounded-md ${
+                        selectedSize === size ? "bg-red-500 text-white" : ""
+                      }`}
                     >
                       {size}
                     </button>
@@ -280,21 +298,13 @@ export default function detailed() {
                   </p>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
-
-
       </div>
-
       <div className=" max-w-[1170px] mx-auto ">
         <ProductSlider rows={1} products={productData2} />
       </div>{" "}
     </div>
-  )
+  );
 }
-
-
-
-

@@ -13,6 +13,7 @@ export interface Product {
   price: number;
   description: string;
   image: string;
+  is_in_stock: boolean;
 }
 
 interface ProductCardProps {
