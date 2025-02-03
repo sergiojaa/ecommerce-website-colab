@@ -6,10 +6,27 @@ export default async function page({
   params: Promise<{ id: string }>;
 }) {
   const categoryId = (await params).id;
-  const response = await fetch(
+
+  // Fetch category data
+  const categoryResponse = await fetch(
     `https://geguchadzeadmin.pythonanywhere.com/products/categories/${categoryId}`
   );
-  const category = await response.json();
+  const category = await categoryResponse.json();
 
-  return <div>{category.name}</div>;
+  // Fetch products for the category
+  const productsResponse = await fetch(
+    `https://geguchadzeadmin.pythonanywhere.com/products/categories/Electronics/products/`
+  );
+  const products = await productsResponse.json();
+
+  return (
+    <div>
+      <h1>{category.name}</h1>
+      <ul>
+        {products.map((product: { name: string; id: string }) => (
+          <li key={product.id}>{product.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
 }
