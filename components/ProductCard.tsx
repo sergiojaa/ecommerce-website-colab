@@ -46,7 +46,28 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         console.log(err)
       })
   }
+  const addToWishlist = (user: number | React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
+    const token = localStorage.getItem('token')
+    if (!token) {
+      return router.push('/SignIn')
+    }
 
+
+    axios.post(
+      'https://geguchadzeadmin.pythonanywhere.com/wishlist/items/',
+      {
+        'quantity': 1,
+        'product': product.id
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    )
+      .then((res) => {
+        console.log(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
   return (
     <div className="group cursor-pointer ">
       <div className="relative">
@@ -67,23 +88,26 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           -40%
         </p>
         <div className="absolute top-[12px] right-[12px] bg-purple-100 rounded-full p-1 cursor-pointer">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M8 5C5.7912 5 4 6.73964 4 8.88594C4 10.6185 4.7 14.7305 11.5904 18.8873C11.7138 18.961 11.8555 19 12 19C12.1445 19 12.2862 18.961 12.4096 18.8873C19.3 14.7305 20 10.6185 20 8.88594C20 6.73964 18.2088 5 16 5C13.7912 5 12 7.35511 12 7.35511C12 7.35511 10.2088 5 8 5Z"
-              stroke="black"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <Link href={`/detailed?id=${product.id}`}>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M8 5C5.7912 5 4 6.73964 4 8.88594C4 10.6185 4.7 14.7305 11.5904 18.8873C11.7138 18.961 11.8555 19 12 19C12.1445 19 12.2862 18.961 12.4096 18.8873C19.3 14.7305 20 10.6185 20 8.88594C20 6.73964 18.2088 5 16 5C13.7912 5 12 7.35511 12 7.35511C12 7.35511 10.2088 5 8 5Z"
+                stroke="black"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </Link>
+
         </div>
-        <div className="absolute top-[54px] right-[12px] bg-purple-100 rounded-full p-1 cursor-pointer">
+        <div onClick={addToWishlist} className="absolute top-[54px] right-[12px] bg-purple-100 rounded-full p-1 cursor-pointer">
           <svg
             width="24"
             height="24"
@@ -108,7 +132,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <p className="mr-3 text-base text-[#DB4444] font-medium">
           {product.price}
         </p>
-        <p className="mr-3 text-base text-[#808080] font-medium line-through">
+
+        <p
+          className="mr-3 text-base text-[#808080] font-medium line-through">
+
           $2000
         </p>
       </div>

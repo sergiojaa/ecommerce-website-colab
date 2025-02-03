@@ -69,14 +69,14 @@ export default function detailed() {
             <div className="grid grid-cols-12 gap-[70px] mb-[140px]">
               <div>
                 {slides.map((item, index) => (
-                  <div className="w-[100px]" key={index}>
-                    <img className="w-[100px]" src={item.image} />
+                  <div className="w-[100px] " key={index}>
+                    <img className="w-[300px] py-3" src={item.image} />
                   </div>
                 ))}
               </div>
-              <div className="col-span-8 bg-lightblue text-center">
+              <div className="col-span-8 pl-32 bg-lightblue text-center">
                 <img
-                  className="mb-4 w-[500px] h-[350px]"
+                  className="mb-4 w-[600px] h-[350px]"
                   src={product?.image}
                   alt={product?.title}
                 />
