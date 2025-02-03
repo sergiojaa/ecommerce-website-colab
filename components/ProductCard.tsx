@@ -46,7 +46,28 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         console.log(err)
       })
   }
+  const addToWishlist = (user: number | React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
+    const token = localStorage.getItem('token')
+    if (!token) {
+      return router.push('/SignIn')
+    }
 
+
+    axios.post(
+      'https://geguchadzeadmin.pythonanywhere.com/wishlist/items/',
+      {
+        'quantity': 1,
+        'product': product.id
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    )
+      .then((res) => {
+        console.log(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
   return (
     <div className="group cursor-pointer ">
       <div className="relative">
@@ -86,7 +107,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           </Link>
 
         </div>
-        <div className="absolute top-[54px] right-[12px] bg-purple-100 rounded-full p-1 cursor-pointer">
+        <div onClick={addToWishlist} className="absolute top-[54px] right-[12px] bg-purple-100 rounded-full p-1 cursor-pointer">
           <svg
             width="24"
             height="24"
@@ -111,7 +132,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <p className="mr-3 text-base text-[#DB4444] font-medium">
           {product.price}
         </p>
-        <p className="mr-3 text-base text-[#808080] font-medium line-through">
+
+        <p
+          className="mr-3 text-base text-[#808080] font-medium line-through">
+
           $2000
         </p>
       </div>
