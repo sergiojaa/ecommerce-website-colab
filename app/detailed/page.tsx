@@ -124,15 +124,17 @@ export default function detailed() {
               <div className="flex mt-2 gap-[24px] items-center mb-[24px]">
                 <h2 className="text-xl font-medium">Size:</h2>
                 <div className="flex gap-[16px] text-sm font-medium">
-                  {["XS", "S", "M", "L", "XL"].map((size) => (
+                  {product?.size.map((size: { id: number; name: string }) => (
                     <button
-                      key={size}
-                      onClick={() => setSelectedSize(size)}
+                      key={size.id}
+                      onClick={() => setSelectedSize(size.name)}
                       className={`px-2 py-1 border border-gray-300 rounded-md ${
-                        selectedSize === size ? "bg-red-500 text-white" : ""
+                        selectedSize === size.name
+                          ? "bg-red-500 text-white"
+                          : ""
                       }`}
                     >
-                      {size}
+                      {size.name}
                     </button>
                   ))}
                 </div>
