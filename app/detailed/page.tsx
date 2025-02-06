@@ -15,6 +15,7 @@ export default function detailed() {
 
   const [product, setProduct] = useState<Product | null>(null);
   const [slides, setSlides] = useState([]);
+  const [selectedColor, setSelectedColor] = useState<string | null>(null);
 
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
@@ -33,33 +34,10 @@ export default function detailed() {
 
     axios
       .get(
-        `https://geguchadzeadmin.pythonanywhere.com/products/products/${id}/`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
+        `https://geguchadzeadmin.pythonanywhere.com/products/products/${id}/`
       )
       .then((res) => {
         setProduct(res.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, [id]);
-  useEffect(() => {
-    if (!id) return;
-
-    const token = localStorage.getItem("token");
-
-    axios
-      .get(
-        `https://geguchadzeadmin.pythonanywhere.com/products/products/${id}/images/`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
-      .then((res) => {
-        setSlides(res.data);
-        console.log(res.data);
       })
       .catch((err) => {
         console.error(err);
@@ -73,13 +51,13 @@ export default function detailed() {
         <div>
           <div className="flex">
             <div className="grid grid-cols-12 gap-[70px] mb-[140px]">
-              <div>
+              {/* <div>
                 {slides.map((item, index) => (
                   <div className="w-[100px]" key={index}>
                     <img className="w-[100px]" src={item.image} />
                   </div>
                 ))}
-              </div>
+              </div> */}
               <div className="col-span-8 bg-lightblue text-center">
                 <img
                   className="mb-4 w-[500px] h-[350px] bg-red-500"
@@ -121,8 +99,25 @@ export default function detailed() {
                 <div className="flex items-center gap-[24px] mb-[24px]">
                   <h2 className="text-lg font-medium">Colors:</h2>
                   <div className="flex gap-[8px]">
-                    <div className="w-6 h-6 rounded-full border border-gray-300 bg-white"></div>
-                    <div className="w-6 h-6 rounded-full border border-gray-300 bg-red-500"></div>
+                    {product?.color.map((color) => (
+                      <div key={color.id}>
+                        <button
+                          className="px-2 py-1 h-[30px] w-[30px] border border-gray-300 rounded-md"
+                          onClick={() => setSelectedColor(color.name)} // აქ ფერის არჩევას აიძულებთ
+                          style={{
+                            backgroundColor: color.name.toLowerCase(),
+                            border:
+                              selectedColor === color.name
+                                ? "2px solid black"
+                                : "",
+                            borderRadius: "50%", // რაუნდი ფორმის ღილაკები
+                            cursor: "pointer",
+                          }}
+                        >
+                          {/* აქ შეგვიძლია დავტოვოთ მხოლოდ ფერის ვადევნო */}
+                        </button>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -142,6 +137,23 @@ export default function detailed() {
                   ))}
                 </div>
               </div>
+              {/* <div className="flex mt-2 gap-[24px] items-center mb-[24px]">
+                <h2 className="text-xl font-medium">Size:</h2>
+                <div className="flex gap-[16px] text-sm font-medium">
+                  {["XS", "S", "M", "L", "XL"].map((size) => (
+                    <button
+                      key={size}
+                      onClick={() => setSelectedSize(size)}
+                      className={`px-2 py-1 border border-gray-300 rounded-md ${
+                        selectedSize === size ? "bg-red-500 text-white" : ""
+                      }`}
+                    >
+                      {size}
+                    </button>
+                  ))}
+                </div>
+              </div> */}
+
               <div className="flex items-center gap-[16px]">
                 <div className="flex items-center border border-gray-300 rounded-md">
                   <button

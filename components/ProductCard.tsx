@@ -4,7 +4,15 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import detailed from "@/app/detailed/page";
+export interface Color {
+  id: number;
+  name: string;
+}
 
+export interface Size {
+  id: number;
+  name: string;
+}
 export interface Product {
   id: number;
   title: string;
@@ -14,6 +22,8 @@ export interface Product {
   description: string;
   image: string;
   is_in_stock: boolean;
+  color: Color[];
+  size: Size[];
 }
 
 interface ProductCardProps {
