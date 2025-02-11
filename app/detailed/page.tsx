@@ -53,8 +53,8 @@ export default function detailed() {
             <div className="grid grid-cols-12 gap-[70px] mb-[140px]">
               {/* <div>
                 {slides.map((item, index) => (
-                  <div className="w-[100px]" key={index}>
-                    <img className="w-[100px]" src={item.image} />
+                  <div className="w-[100px] " key={index}>
+                    <img className="w-[300px] py-3" src={item.image} />
                   </div>
                 ))}
               </div> */}
@@ -139,22 +139,6 @@ export default function detailed() {
                   ))}
                 </div>
               </div>
-              {/* <div className="flex mt-2 gap-[24px] items-center mb-[24px]">
-                <h2 className="text-xl font-medium">Size:</h2>
-                <div className="flex gap-[16px] text-sm font-medium">
-                  {["XS", "S", "M", "L", "XL"].map((size) => (
-                    <button
-                      key={size}
-                      onClick={() => setSelectedSize(size)}
-                      className={`px-2 py-1 border border-gray-300 rounded-md ${
-                        selectedSize === size ? "bg-red-500 text-white" : ""
-                      }`}
-                    >
-                      {size}
-                    </button>
-                  ))}
-                </div>
-              </div> */}
 
               <div className="flex items-center gap-[16px]">
                 <div className="flex items-center border border-gray-300 rounded-md">
