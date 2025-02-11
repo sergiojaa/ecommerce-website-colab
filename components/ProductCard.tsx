@@ -1,9 +1,18 @@
+"use client";
 import axios from "axios";
 import React from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import detailed from "@/app/detailed/page";
+export interface Color {
+  id: number;
+  name: string;
+}
 
+export interface Size {
+  id: number;
+  name: string;
+}
 export interface Product {
   id: number;
   title: string;
@@ -12,6 +21,9 @@ export interface Product {
   price: number;
   description: string;
   image: string;
+  is_in_stock: boolean;
+  color: Color[];
+  size: Size[];
 }
 
 interface ProductCardProps {
@@ -19,55 +31,36 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const router = useRouter()
+  const router = useRouter();
 
   if (!product) {
     return <div>Product data is unavailable.</div>;
   }
-  const addToCart = (user: number | React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
-    const token = localStorage.getItem('token')
+  const addToCart = (
+    user: number | React.MouseEvent<HTMLParagraphElement, MouseEvent>
+  ) => {
+    const token = localStorage.getItem("token");
     if (!token) {
-      return router.push('/SignIn')
+      return router.push("/SignIn");
     }
 
-
-    axios.post(
-      'https://geguchadzeadmin.pythonanywhere.com/cart/cart-items/',
-      {
-        'quantity': 1,
-        'product': product.id
-      },
-      { headers: { Authorization: `Bearer ${token}` } }
-    )
+    axios
+      .post(
+        "https://geguchadzeadmin.pythonanywhere.com/cart/cart-items/",
+        {
+          quantity: 1,
+          product: product.id,
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
       .then((res) => {
-        console.log(res.data)
+        console.log(res.data);
       })
       .catch((err) => {
-        console.log(err)
-      })
-  }
-  const addToWishlist = (user: number | React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
-    const token = localStorage.getItem('token')
-    if (!token) {
-      return router.push('/SignIn')
-    }
+        console.log(err);
+      });
+  };
 
-
-    axios.post(
-      'https://geguchadzeadmin.pythonanywhere.com/wishlist/items/',
-      {
-        'quantity': 1,
-        'product': product.id
-      },
-      { headers: { Authorization: `Bearer ${token}` } }
-    )
-      .then((res) => {
-        console.log(res.data)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
   return (
     <div className="group cursor-pointer ">
       <div className="relative">
@@ -81,7 +74,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
         <p
           onClick={() => addToCart(1)}
-          className="invisible group-hover:visible transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:bg-black absolute bottom-0 w-full bg-black text-white text-center text-base font-medium p-2 border-t-0 border-r-0 rounded-bl-lg rounded-br-lg">
+          className="invisible group-hover:visible transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:bg-black absolute bottom-0 w-full bg-black text-white text-center text-base font-medium p-2 border-t-0 border-r-0 rounded-bl-lg rounded-br-lg"
+        >
           Add To Cart
         </p>
         <p className="absolute top-[12px] left-[12px] bg-[#DB4444] text-white text-3 px-3 py-1 rounded cursor-pointer">
@@ -105,9 +99,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               />
             </svg>
           </Link>
-
         </div>
-        <div onClick={addToWishlist} className="absolute top-[54px] right-[12px] bg-purple-100 rounded-full p-1 cursor-pointer">
+        <div className="absolute top-[54px] right-[12px] bg-purple-100 rounded-full p-1 cursor-pointer">
           <svg
             width="24"
             height="24"
@@ -133,9 +126,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           {product.price}
         </p>
 
-        <p
-          className="mr-3 text-base text-[#808080] font-medium line-through">
-
+        <p className="mr-3 text-base text-[#808080] font-medium line-through">
           $2000
         </p>
       </div>
