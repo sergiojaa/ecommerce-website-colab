@@ -1,4 +1,5 @@
-'use client'
+'use client';
+
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -68,24 +69,47 @@ export default function Cart() {
     }, [router]);
 
     return (
-        <div className="p-4">
+        <div className="p-4 max-w-6xl mx-auto">
             <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
-            <div className="flex gap-10">
-                {mergedCartItems?.map((item, index) => (
-                    <div key={index} className="bg-gray-100 max-w-max mx-auto flex p-4 my-2 rounded-md flex items-center gap-4">
-                        <img
-                            src={item.image}
-                            alt={item.name}
-                            className="w-[300პხ] h-16 object-cover rounded-md"
-                        />
-                        <div className="flex gap-40">
-                            <h2 className="text-lg font-semibold">{item.name}</h2>
-                            <p className="text-gray-800 font-bold">Price: ${item.price}</p>
-
-                            <p className="text-gray-800">Quantity: {item.quantity}</p>
-                        </div>
-                    </div>
-                ))}
+            <table className="w-full border-collapse border border-gray-300">
+                <thead>
+                    <tr className="bg-gray-100">
+                        <th className="p-2 border border-gray-300">Product</th>
+                        <th className="p-2 border border-gray-300">Price</th>
+                        <th className="p-2 border border-gray-300">Quantity</th>
+                        <th className="p-2 border border-gray-300">Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {mergedCartItems.map((item) => (
+                        <tr key={item.id} className="text-center">
+                            <td className="p-2 border border-gray-300 flex items-center gap-2">
+                                <img src={item.image} alt={item.name} className="w-12 h-12 object-cover" />
+                                {item.name}
+                            </td>
+                            <td className="p-2 border border-gray-300">${item.price}</td>
+                            <td className="p-2 border border-gray-300">
+                                <input type="number" value={item.quantity} min="1" className="w-12 text-center border border-gray-300" readOnly />
+                            </td>
+                            <td className="p-2 border border-gray-300">${item.price * item.quantity}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+            <div className="flex justify-between items-center mt-4">
+                <button className="border border-gray-500 px-4 py-2">Return To Shop</button>
+                <button className="border border-gray-500 px-4 py-2">Update Cart</button>
+            </div>
+            <div className="flex justify-between items-center mt-4">
+                <input type="text" placeholder="Coupon Code" className="border border-gray-300 px-4 py-2" />
+                <button className="bg-red-500 text-white px-4 py-2">Apply Coupon</button>
+            </div>
+            <div className="border border-gray-300 p-4 mt-4 max-w-sm ml-auto">
+                <h2 className="text-xl font-bold mb-2">Cart Total</h2>
+                <p className="flex justify-between"><span>Subtotal:</span> <span>${mergedCartItems.reduce((acc, item) => acc + item.price * item.quantity, 0)}</span></p>
+                <p className="flex justify-between"><span>Shipping:</span> <span>Free</span></p>
+                <p className="flex justify-between font-bold"><span>Total:</span> <span>${mergedCartItems.reduce((acc, item) => acc + item.price * item.quantity, 0)}</span></p>
+                <button className="bg-red-500 text-white w-full py-2 mt-4">Proceed to Checkout</button>
             </div>
         </div>
     );
