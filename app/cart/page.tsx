@@ -3,6 +3,7 @@
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { X } from 'lucide-react';
 
 type CartItem = {
     product_name: string;
@@ -66,50 +67,107 @@ export default function Cart() {
 
         getCartItems(token);
         getProducts();
-    }, [router]);
+    }, [router, getCartItems]);
+
+    const subtotal = mergedCartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
     return (
-        <div className="p-4 max-w-6xl mx-auto">
-            <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
-            <table className="w-full border-collapse border border-gray-300">
-                <thead>
-                    <tr className="bg-gray-100">
-                        <th className="p-2 border border-gray-300">Product</th>
-                        <th className="p-2 border border-gray-300">Price</th>
-                        <th className="p-2 border border-gray-300">Quantity</th>
-                        <th className="p-2 border border-gray-300">Subtotal</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {mergedCartItems.map((item) => (
-                        <tr key={item.id} className="text-center">
-                            <td className="p-2 border border-gray-300 flex items-center gap-2">
-                                <img src={item.image} alt={item.name} className="w-12 h-12 object-cover" />
-                                {item.name}
-                            </td>
-                            <td className="p-2 border border-gray-300">${item.price}</td>
-                            <td className="p-2 border border-gray-300">
-                                <input type="number" value={item.quantity} min="1" className="w-12 text-center border border-gray-300" readOnly />
-                            </td>
-                            <td className="p-2 border border-gray-300">${item.price * item.quantity}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-            <div className="flex justify-between items-center mt-4">
-                <button className="border border-gray-500 px-4 py-2">Return To Shop</button>
-                <button className="border border-gray-500 px-4 py-2">Update Cart</button>
+        <div className="max-w-[1200px] mx-auto px-4 py-8">
+            {/* Header */}
+            <div className="grid grid-cols-[2fr,1fr,1fr,1fr] gap-4 mb-6 px-4">
+                <h3 className="text-base font-medium text-gray-600">Product</h3>
+                <h3 className="text-base font-medium text-gray-600 text-center">Price</h3>
+                <h3 className="text-base font-medium text-gray-600 text-center">Quantity</h3>
+                <h3 className="text-base font-medium text-gray-600 text-center">Subtotal</h3>
             </div>
-            <div className="flex justify-between items-center mt-4">
-                <input type="text" placeholder="Coupon Code" className="border border-gray-300 px-4 py-2" />
-                <button className="bg-red-500 text-white px-4 py-2">Apply Coupon</button>
+
+            {/* Cart Items */}
+            <div className="space-y-6">
+                {mergedCartItems.map((item, index) => (
+                    <div
+                        key={index}
+                        className="grid grid-cols-[2fr,1fr,1fr,1fr] gap-4 items-center bg-white rounded-lg shadow-sm p-4"
+                    >
+                        <div className="flex items-center gap-4">
+                            <button className="text-gray-400 hover:text-gray-600 transition-colors">
+                                <X className="h-5 w-5" />
+                            </button>
+                            <img
+                                src={item.image || "/placeholder.svg"}
+                                alt={item.name}
+                                className="w-20 h-20 object-cover rounded-lg"
+                            />
+                            <span className="font-medium">{item.name}</span>
+                        </div>
+                        <div className="text-center">${item.price}</div>
+                        <div className="flex justify-center">
+                            <div className="inline-flex items-center border rounded">
+                                <input
+                                    type="number"
+                                    value={item.quantity}
+                                    min="1"
+                                    className="w-16 text-center py-2 px-2"
+                                    readOnly
+                                />
+                                <div className="flex flex-col border-l">
+                                    <button className="px-2 py-[1px] hover:bg-gray-50 border-b">▲</button>
+                                    <button className="px-2 py-[1px] hover:bg-gray-50">▼</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="text-center">${(item.price * item.quantity).toFixed(2)}</div>
+                    </div>
+                ))}
             </div>
-            <div className="border border-gray-300 p-4 mt-4 max-w-sm ml-auto">
-                <h2 className="text-xl font-bold mb-2">Cart Total</h2>
-                <p className="flex justify-between"><span>Subtotal:</span> <span>${mergedCartItems.reduce((acc, item) => acc + item.price * item.quantity, 0)}</span></p>
-                <p className="flex justify-between"><span>Shipping:</span> <span>Free</span></p>
-                <p className="flex justify-between font-bold"><span>Total:</span> <span>${mergedCartItems.reduce((acc, item) => acc + item.price * item.quantity, 0)}</span></p>
-                <button className="bg-red-500 text-white w-full py-2 mt-4">Proceed to Checkout</button>
+
+            {/* Actions */}
+            <div className="flex justify-between mt-8">
+                <button
+                    onClick={() => router.push('/shop')}
+                    className="px-6 py-3 border rounded-lg hover:bg-gray-50 transition-colors"
+                >
+                    Return To Shop
+                </button>
+                <button className="px-6 py-3 border rounded-lg hover:bg-gray-50 transition-colors">
+                    Update Cart
+                </button>
+            </div>
+
+            {/* Coupon and Cart Total */}
+            <div className="grid md:grid-cols-2 gap-8 mt-8">
+                <div className="flex gap-4">
+                    <input
+                        type="text"
+                        placeholder="Coupon Code"
+                        className="flex-1 px-4 py-3 border rounded-lg"
+                    />
+                    <button className="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors">
+                        Apply Coupon
+                    </button>
+                </div>
+
+                <div className="md:ml-auto w-full max-w-md">
+                    <div className="border rounded-lg p-6">
+                        <h2 className="text-xl font-semibold mb-6">Cart Total</h2>
+                        <div className="space-y-4">
+                            <div className="flex justify-between py-3 border-b">
+                                <span className="text-gray-600">Subtotal:</span>
+                                <span>${subtotal.toFixed(2)}</span>
+                            </div>
+                            <div className="flex justify-between py-3 border-b">
+                                <span className="text-gray-600">Shipping:</span>
+                                <span className="text-green-600">Free</span>
+                            </div>
+                            <div className="flex justify-between py-3">
+                                <span className="font-semibold">Total:</span>
+                                <span className="font-semibold">${subtotal.toFixed(2)}</span>
+                            </div>
+                            <button className="w-full py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors mt-4">
+                                Procees to checkout
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );
