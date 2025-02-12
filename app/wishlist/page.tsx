@@ -66,22 +66,23 @@ export default function Wishlist() {
     }, [wishlistProducts, products]);
 
     return (
-        <div className="p-4">
+        <div className="p-10">
             <h1 className="text-2xl font-bold mb-4">Your Wishlist</h1>
             {error && <p className="text-red-500">{error}</p>}
-            <div className="flex gap-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {mergedWishlistItems.map((item) => (
-                    <div key={item.id} className="bg-gray-100 max-w-max mx-auto flex p-4 my-2 rounded-md items-center gap-4">
+                    <div key={item.id} className="bg-white shadow-md rounded-lg p-4 flex flex-col items-center text-center">
                         <img
                             src={item.image}
                             alt={item.name}
-                            className="w-[300px] h-16 object-cover rounded-md"
+                            className="w-40 h-40 object-cover rounded-md"
                         />
-                        <div className="flex gap-40">
-                            <h2 className="text-lg font-semibold">{item.name}</h2>
-                            <p className="text-gray-800 font-bold">Price: ${item.price}</p>
-                            <p className="text-gray-800">Added at: {item.added_at}</p>
-                        </div>
+                        <h2 className="text-lg font-semibold mt-2">{item.name}</h2>
+                        <p className="text-red-500 font-bold">${item.price}</p>
+                        <p className="text-gray-500 text-sm">Added at: {item.added_at}</p>
+                        <button className="mt-2 px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800">
+                            <span role="img" aria-label="cart">🛒</span> Add To Cart
+                        </button>
                     </div>
                 ))}
             </div>
