@@ -24,6 +24,12 @@ export interface Product {
   is_in_stock: boolean;
   color: Color[];
   size: Size[];
+  additional_images: AdditionalImages[]
+
+}
+interface AdditionalImages {
+  id: number;
+  image: string
 }
 
 interface ProductCardProps {

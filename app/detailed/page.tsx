@@ -37,6 +37,7 @@ export default function detailed() {
         `https://geguchadzeadmin.pythonanywhere.com/products/products/${id}/`
       )
       .then((res) => {
+        console.log(res.data)
         setProduct(res.data);
       })
       .catch((err) => {
@@ -51,16 +52,16 @@ export default function detailed() {
         <div>
           <div className="flex">
             <div className="grid grid-cols-12 gap-[70px] mb-[140px]">
-              {/* <div>
-                {slides.map((item, index) => (
+              <div className="bg-yellow-500">
+                {product?.additional_images.map((item, index) => (
                   <div className="w-[100px] " key={index}>
                     <img className="w-[300px] py-3" src={item.image} />
                   </div>
                 ))}
-              </div> */}
+              </div>
               <div className="col-span-8 bg-lightblue text-center">
                 <img
-                  className="mb-4 w-[500px] h-[350px] bg-red-500"
+                  className="mb-4 w-[500px] h-[350px]"
                   src={product?.image}
                   alt={product?.title}
                 />
@@ -77,11 +78,10 @@ export default function detailed() {
                     (59 Reviews)
                   </span>
                   <p
-                    className={`text-sm font-normal ${
-                      product && product.is_in_stock
-                        ? "text-green-500"
-                        : "text-red-500"
-                    }`}
+                    className={`text-sm font-normal ${product && product.is_in_stock
+                      ? "text-green-500"
+                      : "text-red-500"
+                      }`}
                   >
                     {product && product.is_in_stock
                       ? "In Stock"
@@ -128,11 +128,10 @@ export default function detailed() {
                     <button
                       key={size.id}
                       onClick={() => setSelectedSize(size.name)}
-                      className={`px-2 py-1 border border-gray-300 rounded-md ${
-                        selectedSize === size.name
-                          ? "bg-red-500 text-white"
-                          : ""
-                      }`}
+                      className={`px-2 py-1 border border-gray-300 rounded-md ${selectedSize === size.name
+                        ? "bg-red-500 text-white"
+                        : ""
+                        }`}
                     >
                       {size.name}
                     </button>
