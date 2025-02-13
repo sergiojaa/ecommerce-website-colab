@@ -28,7 +28,7 @@ export default function Header() {
 
   return (
     <div>
-      <div className="flex w-[1170px] mx-auto items-center items-center justify-between text-center py-[16px]">
+      <div className="flex w-[1170px] mx-auto items-center justify-between text-center py-[16px]">
         <div>
           <Link href={"/"}>
             <Image
@@ -113,7 +113,7 @@ export default function Header() {
             </Link>
           </div>
           <div className="cursor-pointer">
-            <Link href={"/account"}>
+            <Link href={"/SignUp"}>
               <Image src="/user.png" width={30} height={50} alt="cart image" />
             </Link>
           </div>
