@@ -28,7 +28,28 @@ export default function Header() {
 
   return (
     <div>
-      <div className="flex w-full max-w-[1170px] mx-auto items-center justify-between text-center py-[16px] ">
+      <div className="relative w-full flex md:hidden mt-[20px]">
+        <input
+          type="text"
+          placeholder="Search..."
+          className="w-full h-[38px] bg-[#F5F5F5] pl-2 pr-7 rounded-md placeholder:text-sm md:hidden"
+        />
+
+        {/* Desktop-ისთვის */}
+        <input
+          type="text"
+          placeholder="What are you looking for?"
+          className="w-full h-[38px] bg-[#F5F5F5] pl-2 pr-7 rounded-md placeholder:text-lg hidden md:block"
+        />
+        <div className="absolute top-0 bottom-0 m-auto right-3 h-fit">
+          <FontAwesomeIcon
+            className="w-[16px] h-[16px]"
+            icon={faMagnifyingGlass}
+            style={{ color: "#000000" }}
+          />
+        </div>
+      </div>
+      <div className="flex w-full max-w-[1170px] mx-auto items-center justify-between text-center py-[16px]">
         <div>
           <Link href="/">
             <Image
@@ -40,7 +61,7 @@ export default function Header() {
             />
           </Link>
         </div>
-        <div className="hidden md:flex ml-[16px]">
+        <div className="hidden sm:flex ml-[16px]">
           <ul className="flex items-center gap-10 cursor-pointer">
             <Link href="/">
               <li
@@ -92,26 +113,28 @@ export default function Header() {
             </Link>
           </ul>
         </div>
-        <div className="relative w-[243px] mx-[10px]">
+        <div className="relative w-[243px] mx-[10px] hidden md:flex">
           <input
-            placeholder="What are you looking for?"
-            className="w-full h-[38px] bg-[#F5F5F5] pl-3 pr-10 rounded-md"
             type="text"
+            placeholder="Search..."
+            className="w-full h-[38px] bg-[#F5F5F5] pl-2 pr-7 rounded-md placeholder:text-sm md:hidden"
           />
-          <div className="absolute top-1/2 right-3 transform -translate-y-1/2">
+
+          {/* Desktop-ისთვის */}
+          <input
+            type="text"
+            placeholder="What are you looking for?"
+            className="w-full h-[38px] bg-[#F5F5F5] pl-2 pr-7 rounded-md placeholder:text-lg hidden md:block"
+          />
+          <div className="absolute top-0 bottom-0 m-auto right-3 h-fit">
             <FontAwesomeIcon
               className="w-[16px] h-[16px]"
               icon={faMagnifyingGlass}
               style={{ color: "#000000" }}
             />
-            <div className="absolute top-1/2 right-3 transform -translate-y-1/2">
-              <FontAwesomeIcon
-                className="w-[16px] h-[16px]"
-                icon={faMagnifyingGlass}
-                style={{ color: "#000000" }}
-              />
-            </div>
           </div>
+        </div>
+        <div className="flex gap-[16px]">
           <div className="cursor-pointer">
             <Link href="/wishlist">
               <Image
@@ -135,7 +158,7 @@ export default function Header() {
         </div>
       </div>
       <hr className="hidden md:flex" />
-      <div className="flex md:hidden">
+      <div className="flex sm:hidden">
         <ul className="flex items-center gap-10 cursor-pointer">
           <Link href="/">
             <li
