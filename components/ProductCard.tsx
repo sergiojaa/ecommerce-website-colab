@@ -3,7 +3,6 @@ import axios from "axios";
 import React from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import detailed from "@/app/detailed/page";
 export interface Color {
   id: number;
   name: string;
