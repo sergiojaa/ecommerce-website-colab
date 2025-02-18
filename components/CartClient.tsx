@@ -28,7 +28,6 @@ export default function CartClient({
 }) {
   const router = useRouter();
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
-  const [products, setProducts] = useState<Product[]>(productData);
   const [mergedCartItems, setMergedCartItems] = useState<
     (CartItem & Product)[]
   >([]);
@@ -47,14 +46,14 @@ export default function CartClient({
   };
 
   useEffect(() => {
-    if (cartItems.length > 0 && products.length > 0) {
+    if (cartItems.length > 0 && productData.length > 0) {
       const merged = cartItems.map((cartItem) => {
-        const product = products.find((p) => p.id === cartItem.product);
+        const product = productData.find((p) => p.id === cartItem.product);
         return { ...cartItem, ...product };
       });
       setMergedCartItems(merged);
     }
-  }, [cartItems, products]);
+  }, [cartItems, productData]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -64,7 +63,7 @@ export default function CartClient({
     }
 
     getCartItems(token);
-  }, []);
+  }, [router]);
 
   const subtotal = mergedCartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,

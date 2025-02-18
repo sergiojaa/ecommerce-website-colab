@@ -2,8 +2,8 @@
 import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import FetchCategories from "@/FetchCategories";
-import { Navigation } from "swiper/modules";
-import Image from "next/image"; // იმპორტი
+import { Navigation, Swiper as SwiperType } from "swiper/modules"; // Import Swiper type
+import Image from "next/image";
 
 // Import Swiper styles
 import "swiper/css";
@@ -13,10 +13,12 @@ import "swiper/css/free-mode";
 import { FreeMode } from "swiper/modules";
 
 export default function CategorySlider() {
-  const { productData, loading, error } = FetchCategories(); // Use FetchCategories to get data
+  const { productData, loading, error } = FetchCategories();
   const [isLastSlide, setIsLastSlide] = useState(false);
   const [isFirstSlide, setIsFirstSlide] = useState(true);
-  const handleSlideChange = (swiper: any) => {
+
+  // Update to use the correct type for swiper
+  const handleSlideChange = (swiper: SwiperType) => {
     if (swiper.isEnd) {
       setIsLastSlide(true);
     } else {
@@ -29,10 +31,12 @@ export default function CategorySlider() {
       setIsFirstSlide(false);
     }
   };
-  const swiperRef = useRef<any>(null);
 
-  if (loading) return <div>Loading...</div>; // Show loading state
-  if (error) return <div>{error}</div>; // Show error message
+  // Use proper type for swiperRef
+  const swiperRef = useRef<SwiperType | null>(null);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
 
   return (
     <>
@@ -98,10 +102,10 @@ export default function CategorySlider() {
         slidesPerView={2}
         breakpoints={{
           640: {
-            slidesPerView: 3, // 640px და პატარა ეკრანებზე 2 სლაიდი გამოჩნდება
+            slidesPerView: 3,
           },
           1024: {
-            slidesPerView: 4, // 1024px და ზემოთ 4 სლაიდი გამოჩნდება
+            slidesPerView: 4,
           },
         }}
         spaceBetween={30}
@@ -114,24 +118,22 @@ export default function CategorySlider() {
         ref={swiperRef}
         className="mySwiper"
       >
-        {/* Dynamic rendering of SwiperSlide using the fetched data */}
         {productData.map((subcategory, index) => (
           <SwiperSlide
             key={index}
             className="flex justify-center items-center p-2"
           >
             <div className="border border-[#0000004D] p-[10px] md:p-[24px] rounded-lg shadow-md w-full text-center">
-              {/* Display category name and subcategory name */}
               {subcategory.category.imageUrl ? (
                 <Image
-                  src={subcategory.category.imageUrl} // თუ სურათი არსებობს
+                  src={subcategory.category.imageUrl}
                   alt={subcategory.sub_name}
-                  width={500} // უნდა განისაზღვროს სიდიდე
-                  height={300} // უნდა განისაზღვროს სიდიდე
+                  width={500}
+                  height={300}
                   className="w-full h-auto rounded-lg"
                 />
               ) : (
-                <div></div> // თუ სურათი არ არის
+                <div></div>
               )}
               <h3 className="text-lg font-semibold text-gray-800">
                 {subcategory.sub_name}

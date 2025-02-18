@@ -4,6 +4,11 @@ import React, { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image"; // იმპორტი
 
+interface Subcategory {
+  id: number;
+  name: string;
+}
+
 interface Product {
   id: number;
   name: string;
@@ -20,9 +25,9 @@ interface Product {
   is_active: boolean;
   is_in_stock: boolean;
   price: string;
-  size: any[];
+  size: string[]; // specify the type of elements in the size array
   stock: number;
-  subcategory: any | null;
+  subcategory: Subcategory | null; // specify the Subcategory type or null
 }
 
 export default function Page() {
