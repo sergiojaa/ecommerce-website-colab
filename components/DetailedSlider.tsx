@@ -21,7 +21,15 @@ const DetailedSlider = () => {
             onSwiper={setThumbsSwiper}
             loop={true}
             spaceBetween={10}
-            slidesPerView={4} /* სამი სლაიდი ვერტიკალურად */
+            slidesPerView={2}
+            breakpoints={{
+              640: {
+                slidesPerView: 3, // 640px და პატარა ეკრანებზე 2 სლაიდი გამოჩნდება
+              },
+              1024: {
+                slidesPerView: 4, // 1024px და ზემოთ 4 სლაიდი გამოჩნდება
+              },
+            }}
             freeMode={true}
             watchSlidesProgress={true}
             modules={[FreeMode, Thumbs]}

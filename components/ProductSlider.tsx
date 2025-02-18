@@ -10,7 +10,7 @@ interface Product {
   price: number;
   description: string;
   image: string;
-  name: string
+  name: string;
 }
 
 interface ProductSliderProps {
@@ -57,22 +57,24 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ rows, products }) => {
     );
 
   return (
-    <div className="text-center mb-[80px]">
-      <div className="flex justify-between items-end mb-[30px]">
+    <div className="text-center mb-[40px] md:mb-[80px]">
+      <div className="flex justify-between items-end mb-[10px] md:mb-[30px]">
         <div className="flex flex-col items-start">
-          <div className="flex items-center mb-[24px]">
-            <div className="bg-[#DB4444] h-[40px] w-[20px] rounded mr-4"></div>
+          <div className="flex items-center mb-0 md:mb-[24px]">
+            <div className="bg-[#DB4444] h-[20px] md:h-[40px] w-[20px] rounded mr-2 md:mr-4"></div>
             <p className="text-[#DB4444] text-base font-semibold">Today’s</p>
           </div>
           <div className="flex items-center">
-            <p className="mr-[86px] text-4xl font-semibold">Flash Sales</p>
-            <p>22:22:22</p>
+            <p className="mr-[20px] md:mr-[86px] text-xl font-semibold">
+              Flash Sales
+            </p>
           </div>
         </div>
         <div>
           <button
-            className={`custom-prev-${rows} rounded-full p-2 rotate-180 mr-2 ${isFirstSlide ? "bg-none" : "bg-[#F5F5F5]"
-              }`}
+            className={`custom-prev-${rows} rounded-full p-2 rotate-180 mr-2 ${
+              isFirstSlide ? "bg-none" : "bg-[#F5F5F5]"
+            }`}
             onClick={() => swiperRef.current?.swiper.slidePrev()}
           >
             <svg
@@ -92,8 +94,9 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ rows, products }) => {
             </svg>
           </button>
           <button
-            className={`custom-next-${rows} rounded-full p-2 ${isLastSlide ? "bg-none" : "bg-[#F5F5F5]"
-              }`}
+            className={`custom-next-${rows} rounded-full p-2 ${
+              isLastSlide ? "bg-none" : "bg-[#F5F5F5]"
+            }`}
             onClick={() => swiperRef.current?.swiper.slideNext()}
           >
             <svg
@@ -118,7 +121,15 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ rows, products }) => {
       <Swiper
         onSlideChange={handleSlideChange}
         spaceBetween={30}
-        slidesPerView={4}
+        slidesPerView={2}
+        breakpoints={{
+          640: {
+            slidesPerView: 3, // 640px და პატარა ეკრანებზე 2 სლაიდი გამოჩნდება
+          },
+          1024: {
+            slidesPerView: 4, // 1024px და ზემოთ 4 სლაიდი გამოჩნდება
+          },
+        }}
         grid={{
           rows: rows,
           fill: "row",
@@ -128,7 +139,7 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ rows, products }) => {
           nextEl: `.custom-next-${rows}`,
           prevEl: `.custom-prev-${rows}`,
         }}
-        className="mb-[60px]"
+        className="mb-[10px] md:mb-[60px]"
         ref={swiperRef}
       >
         {products.map((product) => (
@@ -138,7 +149,7 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ rows, products }) => {
         ))}
       </Swiper>
 
-      <p className="inline-block bg-[#DB4444] py-4 px-[48px] text-3 text-base font-medium text-white mb-[60px]">
+      <p className="inline-block bg-[#DB4444] py-2 px-[48px] text-3 text-xs font-medium text-white mb-[40px] md:mb-[60px]">
         View All Products
       </p>
 

@@ -35,13 +35,15 @@ export default function CategorySlider() {
 
   return (
     <>
-      <div className="flex flex-col items-start mb-[60px]">
-        <div className="flex items-center mb-[24px]">
-          <div className="bg-[#DB4444] h-[40px] w-[20px] rounded mr-4"></div>
+      <div className="flex flex-col items-start mb-[10px] md:mb-[30px]">
+        <div className="flex items-center mb-0 md:mb-[24px]">
+          <div className="bg-[#DB4444] h-[20px] md:h-[40px] w-[20px] rounded mr-2 md:mr-4"></div>
           <p className="text-[#DB4444] text-base font-semibold">Categories</p>
         </div>
         <div className="flex justify-between items-end w-full">
-          <p className="mr-[86px] text-4xl font-semibold">Browse By Category</p>
+          <p className="mr-[20px] md:mr-[86px] text-xl font-semibold">
+            Browse By Category
+          </p>
           <div>
             <button
               className={`custom-prev rounded-full p-2 rotate-180 mr-2 ${
@@ -92,7 +94,15 @@ export default function CategorySlider() {
       </div>
       <Swiper
         onSlideChange={handleSlideChange}
-        slidesPerView={5}
+        slidesPerView={2}
+        breakpoints={{
+          640: {
+            slidesPerView: 3, // 640px და პატარა ეკრანებზე 2 სლაიდი გამოჩნდება
+          },
+          1024: {
+            slidesPerView: 4, // 1024px და ზემოთ 4 სლაიდი გამოჩნდება
+          },
+        }}
         spaceBetween={30}
         freeMode={true}
         modules={[FreeMode, Navigation]}
@@ -109,7 +119,7 @@ export default function CategorySlider() {
             key={index}
             className="flex justify-center items-center p-2"
           >
-            <div className="border border-[#0000004D] p-[24px] rounded-lg shadow-md w-full text-center">
+            <div className="border border-[#0000004D] p-[10px] md:p-[24px] rounded-lg shadow-md w-full text-center">
               {/* Display category name and subcategory name */}
               {subcategory.category.imageUrl ? (
                 <img
@@ -118,7 +128,7 @@ export default function CategorySlider() {
                   className="w-full h-auto rounded-lg"
                 />
               ) : (
-                <div>No image available</div> // თუ სურათი არ არის
+                <div></div> // თუ სურათი არ არის
               )}
               <h3 className="text-lg font-semibold text-gray-800">
                 {subcategory.sub_name}
@@ -127,7 +137,7 @@ export default function CategorySlider() {
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className="w-full bg-[#D3D3D3] h-[1px] my-[70px]"></div>
+      <div className="w-full bg-[#D3D3D3] h-[1px] my-[20px] md:my-[70px]"></div>
     </>
   );
 }

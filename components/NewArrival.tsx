@@ -9,30 +9,32 @@ import FrameFourImage from "../public/Frame709.png"; // Correct path
 export default function NewArrival() {
   return (
     <div>
-      <div className="flex flex-col items-start mb-[60px]">
-        <div className="flex items-center mb-[24px]">
-          <div className="bg-[#DB4444] h-[40px] w-[20px] rounded mr-4"></div>
+      <div className="flex flex-col items-start mb-[10px] md:mb-[30px]">
+        <div className="flex items-center mb-0 md:mb-[24px]">
+          <div className="bg-[#DB4444] h-[20px] md:h-[40px] w-[20px] rounded mr-2 md:mr-4"></div>
           <p className="text-[#DB4444] text-base font-semibold">Featured</p>
         </div>
         <div className="flex justify-between items-end w-full">
-          <p className="mr-[86px] text-4xl font-semibold">New Arrival</p>
+          <p className="mr-[20px] md:mr-[86px] text-xl font-semibold">
+            New Arrival
+          </p>
         </div>
       </div>
-      <div className="grid grid-rows-2 grid-flow-col gap-[30px] mb-[140px]">
-        <div className="row-span-2 bg-black relative flex justify-center items-end">
+      <div className="grid grid-rows-2 md:grid-flow-col gap-[30px] mb-[60px] md:mb-[140px]">
+        <div className="col-span-2 md:row-span-2 bg-black relative flex justify-center items-end">
           <Image
             src={FrameFourImage}
             alt="PlayStation 5"
             className="object-cover"
           />
           <div className="absolute left-[32px] bottom-[32px]">
-            <p className="text-white text-2xl font-semibold mb-[16px]">
+            <p className="text-white text-xl md:text-2xl font-semibold mb-[16px]">
               PlayStation 5
             </p>
-            <p className="text-white text-sm font-normal mb-[16px]">
+            <p className="text-white text-xs md:text-sm font-normal mb-[16px]">
               Black and White version of the PS5 coming out on sale.
             </p>
-            <a className="text-base text-white font-medium" href="">
+            <a className="text-sm md:text-base text-white font-medium" href="">
               Shop Now
             </a>
           </div>{" "}
@@ -45,13 +47,13 @@ export default function NewArrival() {
             className="object-cover"
           />
           <div className="absolute left-[32px] bottom-[32px]">
-            <p className="text-white text-2xl font-semibold mb-[16px]">
+            <p className="text-white text-xl md:text-2xl font-semibold mb-[16px]">
               Women’s Collections{" "}
             </p>
-            <p className="text-white text-sm font-normal mb-[16px]">
+            <p className="text-white text-xs md:text-sm font-normal mb-[16px]">
               Featured woman collections that give you another vibe.{" "}
             </p>
-            <a className="text-base text-white font-medium" href="">
+            <a className="text-sm md:text-base text-white font-medium" href="">
               Shop Now
             </a>
           </div>{" "}
@@ -68,13 +70,16 @@ export default function NewArrival() {
               className="bg-cover bg-cente m-auto" // Optional, styling classes
             />
             <div className="absolute left-[32px] bottom-[32px]">
-              <p className="text-white text-2xl font-semibold mb-[16px]">
+              <p className="text-white text-xl md:text-2xl font-semibold mb-[16px]">
                 Speakers{" "}
               </p>
-              <p className="text-white text-sm font-normal mb-[16px]">
+              <p className="text-white text-xs md:text-sm font-normal mb-[16px]">
                 Amazon wireless speakers{" "}
               </p>
-              <a className="text-base text-white font-medium" href="">
+              <a
+                className="text-sm md:text-base text-white font-medium"
+                href=""
+              >
                 Shop Now
               </a>
             </div>{" "}
@@ -89,13 +94,16 @@ export default function NewArrival() {
               className="bg-cover bg-center m-auto" // Optional, styling classes
             />
             <div className="absolute left-[32px] bottom-[32px]">
-              <p className="text-white text-2xl font-semibold mb-[16px]">
+              <p className="text-white text-xl md:text-2xl font-semibold mb-[16px]">
                 Perfume{" "}
               </p>
-              <p className="text-white text-sm font-normal mb-[16px]">
+              <p className="text-white text-xs md:text-sm font-normal mb-[16px]">
                 GUCCI INTENSE OUD EDP{" "}
               </p>
-              <a className="text-base text-white font-medium" href="">
+              <a
+                className="text-sm md:text-base text-white font-medium"
+                href=""
+              >
                 Shop Now
               </a>
             </div>{" "}

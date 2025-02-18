@@ -24,12 +24,11 @@ export interface Product {
   is_in_stock: boolean;
   color: Color[];
   size: Size[];
-  additional_images: AdditionalImages[]
-
+  additional_images: AdditionalImages[];
 }
 interface AdditionalImages {
   id: number;
-  image: string
+  image: string;
 }
 
 interface ProductCardProps {
@@ -72,7 +71,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       <div className="relative">
         <Link href={`/detailed?id=${product.id}`}>
           <img
-            className="mb-4 h-[250px]"
+            className="mb-4 h-[150px] md:h-[250px]"
             src={product.image}
             alt={product.title}
           />

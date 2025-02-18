@@ -6,7 +6,7 @@ import ServiceThrdImage from "../images/Services-3.png";
 
 export default function Service() {
   return (
-    <div className="grid grid-cols-3 gap-x-[88px] mb-[140px]">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-x-[88px] gap-y-[20px] md:gap-y-0 mb-[60px] md:mb-[140px]">
       <div className="flex flex-col	 items-center justify-center">
         <Image
           src={ServiceImage}
