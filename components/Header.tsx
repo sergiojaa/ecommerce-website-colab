@@ -40,8 +40,11 @@ export default function Header() {
         <div className="md:hidden cursor-pointer" onClick={() => setMenuOpen(!menuOpen)}>
           <FontAwesomeIcon icon={menuOpen ? faTimes : faBars} className="text-xl" />
         </div>
+        <div
+          className={` md:static top-16 left-0 w-full md:w-auto bg-red-500 md:bg-transparent text-white fixed md:text-black p-5 md:p-0 z-10 transition-transform duration-300 ease-in-out ${menuOpen ? "translate-x-0" : "translate-x-full"
+            } md:translate-x-0 md:flex gap-10 cursor-pointer`}
+        >
 
-        <div className={`md:flex gap-10 cursor-pointer ${menuOpen ? "block" : "hidden"} absolute md:static top-16 left-0 w-full md:w-auto bg-red-500 md:bg-transparent text-white md:text-black p-5 md:p-0 z-10`}>
           <ul className="flex flex-col md:flex-row gap-5 md:gap-10 items-center">
             <Link href="/">
               <li className={active === "Home" ? "border-b-2 border-black md:border-white" : ""} onClick={() => handleClick("Home")}>Home</li>
