@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import FetchCategories from "@/FetchCategories";
 import { Navigation } from "swiper/modules";
+import Image from "next/image"; // იმპორტი
 
 // Import Swiper styles
 import "swiper/css";
@@ -122,9 +123,11 @@ export default function CategorySlider() {
             <div className="border border-[#0000004D] p-[10px] md:p-[24px] rounded-lg shadow-md w-full text-center">
               {/* Display category name and subcategory name */}
               {subcategory.category.imageUrl ? (
-                <img
-                  src={subcategory.category.imageUrl} // ან სწორი სტრუქტურის მიხედვით
+                <Image
+                  src={subcategory.category.imageUrl} // თუ სურათი არსებობს
                   alt={subcategory.sub_name}
+                  width={500} // უნდა განისაზღვროს სიდიდე
+                  height={300} // უნდა განისაზღვროს სიდიდე
                   className="w-full h-auto rounded-lg"
                 />
               ) : (

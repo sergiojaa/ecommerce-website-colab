@@ -4,6 +4,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
+import Image from "next/image"; // იმპორტი
 
 type CartItem = {
   product_name: string;
@@ -97,10 +98,12 @@ export default function CartClient({
               <button className="text-gray-400 hover:text-gray-600 transition-colors">
                 <X className="h-5 w-5" />
               </button>
-              <img
-                src={item.image || "/placeholder.svg"}
+              <Image
+                src={item.image || "/placeholder.svg"} // გამოყენებულია placeholder
                 alt={item.name}
-                className="w-20 h-20 object-cover rounded-lg"
+                width={80} // უნდა განისაზღვროს სიდიდე
+                height={80} // უნდა განისაზღვროს სიდიდე
+                className="object-cover rounded-lg"
               />
               <span className="font-medium">{item.name}</span>
             </div>
