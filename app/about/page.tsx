@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+// import Link from "next/link"; // Remove this line
 import { useState } from "react";
 export default function About() {
   const [activeDiv, setActiveDiv] = useState<number>(0);
