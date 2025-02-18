@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
@@ -125,6 +124,5 @@ export default function Contact() {
         </form>
       </div>
     </div>
-
   );
 }

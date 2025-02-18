@@ -1,5 +1,4 @@
 "use client";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -9,11 +8,11 @@ export default function Account() {
     return savedInfo
       ? JSON.parse(savedInfo)
       : {
-        firstName: "",
-        lastName: "",
-        email: "",
-        address: "",
-      };
+          firstName: "",
+          lastName: "",
+          email: "",
+          address: "",
+        };
   });
 
   const [message, setMessage] = useState("");

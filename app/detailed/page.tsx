@@ -1,12 +1,11 @@
 "use client";
-import DetailedSlider from "@/components/DetailedSlider";
 import ProductSlider from "@/components/ProductSlider";
 import React, { useEffect, useState } from "react";
 import useFetchProducts from "@/useFetchProducts";
 import { useSearchParams } from "next/navigation";
 import { Product } from "@/components/ProductCard";
 import axios from "axios";
-export default function detailed() {
+export default function Detailed() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
   const { productData: productData2 } = useFetchProducts(
@@ -14,7 +13,6 @@ export default function detailed() {
   );
 
   const [product, setProduct] = useState<Product | null>(null);
-  const [slides, setSlides] = useState([]);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
 
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
@@ -37,7 +35,7 @@ export default function detailed() {
         `https://geguchadzeadmin.pythonanywhere.com/products/products/${id}/`
       )
       .then((res) => {
-        console.log(res.data)
+        console.log(res.data);
         setProduct(res.data);
       })
       .catch((err) => {
@@ -78,10 +76,11 @@ export default function detailed() {
                     (59 Reviews)
                   </span>
                   <p
-                    className={`text-sm font-normal ${product && product.is_in_stock
-                      ? "text-green-500"
-                      : "text-red-500"
-                      }`}
+                    className={`text-sm font-normal ${
+                      product && product.is_in_stock
+                        ? "text-green-500"
+                        : "text-red-500"
+                    }`}
                   >
                     {product && product.is_in_stock
                       ? "In Stock"
@@ -128,10 +127,11 @@ export default function detailed() {
                     <button
                       key={size.id}
                       onClick={() => setSelectedSize(size.name)}
-                      className={`px-2 py-1 border border-gray-300 rounded-md ${selectedSize === size.name
-                        ? "bg-red-500 text-white"
-                        : ""
-                        }`}
+                      className={`px-2 py-1 border border-gray-300 rounded-md ${
+                        selectedSize === size.name
+                          ? "bg-red-500 text-white"
+                          : ""
+                      }`}
                     >
                       {size.name}
                     </button>
