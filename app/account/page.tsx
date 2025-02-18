@@ -2,8 +2,15 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
+interface UserInfo {
+  firstName: string;
+  lastName: string;
+  email: string;
+  address: string;
+}
+
 export default function Account() {
-  const [info, setInfo] = useState(() => {
+  const [info, setInfo] = useState<UserInfo>(() => {
     const savedInfo = localStorage.getItem("userInfo");
     return savedInfo
       ? JSON.parse(savedInfo)
@@ -24,7 +31,7 @@ export default function Account() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setInfo((prevInfo: {}) => ({
+    setInfo((prevInfo) => ({
       ...prevInfo,
       [name]: value,
     }));
@@ -41,7 +48,7 @@ export default function Account() {
   };
 
   return (
-    <div className="min-h-screen p-5 ">
+    <div className="min-h-screen p-5">
       {/* Breadcrumb */}
       <div className="mb-5">
         <h3 className="text-gray-500">
