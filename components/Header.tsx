@@ -1,7 +1,11 @@
 "use client";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass, faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
+import {
+  faMagnifyingGlass,
+  faBars,
+  faTimes,
+} from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -37,26 +41,66 @@ export default function Header() {
           </Link>
         </div>
 
-        <div className="md:hidden cursor-pointer" onClick={() => setMenuOpen(!menuOpen)}>
-          <FontAwesomeIcon icon={menuOpen ? faTimes : faBars} className="text-xl" />
+        <div
+          className="md:hidden cursor-pointer"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          <FontAwesomeIcon
+            icon={menuOpen ? faTimes : faBars}
+            className="text-xl"
+          />
         </div>
         <div
-          className={` md:static top-16 left-0 w-full md:w-auto bg-red-500 md:bg-transparent text-white fixed md:text-black p-5 md:p-0 z-10 transition-transform duration-300 ease-in-out ${menuOpen ? "translate-x-0" : "translate-x-full"
-            } md:translate-x-0 md:flex gap-10 cursor-pointer`}
+          className={` md:static top-16 left-0 w-full md:w-auto bg-red-500 md:bg-transparent text-white fixed md:text-black p-5 md:p-0 z-10 transition-transform duration-300 ease-in-out ${
+            menuOpen ? "translate-x-0" : "translate-x-full"
+          } md:translate-x-0 md:flex gap-10 cursor-pointer`}
         >
-
           <ul className="flex flex-col md:flex-row gap-5 md:gap-10 items-center">
             <Link href="/">
-              <li className={active === "Home" ? "border-b-2 border-black md:border-white" : ""} onClick={() => handleClick("Home")}>Home</li>
+              <li
+                className={
+                  active === "Home"
+                    ? "border-b-2 border-black md:border-white"
+                    : ""
+                }
+                onClick={() => handleClick("Home")}
+              >
+                Home
+              </li>
             </Link>
             <Link href="/contact">
-              <li className={active === "Contact" ? "border-b-2 border-black md:border-white" : ""} onClick={() => handleClick("Contact")}>Contact</li>
+              <li
+                className={
+                  active === "Contact"
+                    ? "border-b-2 border-black md:border-white"
+                    : ""
+                }
+                onClick={() => handleClick("Contact")}
+              >
+                Contact
+              </li>
             </Link>
             <Link href="/about">
-              <li className={active === "About" ? "border-b-2 border-black md:border-white" : ""} onClick={() => handleClick("About")}>About</li>
+              <li
+                className={
+                  active === "About"
+                    ? "border-b-2 border-black md:border-white"
+                    : ""
+                }
+                onClick={() => handleClick("About")}
+              >
+                About
+              </li>
             </Link>
             <Link href={isAuthed ? "/account" : "/SignUp"}>
-              <li className={active === "Sign Up" ? "border-b-2 border-black md:border-white" : ""} onClick={() => handleClick("Sign Up")}>
+              <li
+                className={
+                  active === "Sign Up"
+                    ? "border-b-2 border-black md:border-white"
+                    : ""
+                }
+                onClick={() => handleClick("Sign Up")}
+              >
                 {isAuthed ? "Account" : "Sign Up"}
               </li>
             </Link>
@@ -71,12 +115,21 @@ export default function Header() {
               type="text"
             />
             <div className="absolute top-1/2 right-3 transform -translate-y-1/2">
-              <FontAwesomeIcon className="w-[16px] h-[16px]" icon={faMagnifyingGlass} style={{ color: "#000000" }} />
+              <FontAwesomeIcon
+                className="w-[16px] h-[16px]"
+                icon={faMagnifyingGlass}
+                style={{ color: "#000000" }}
+              />
             </div>
           </div>
           <div className="cursor-pointer">
             <Link href="/wishlist">
-              <Image src="/Wishlist.png" width={30} height={50} alt="wishlist image" />
+              <Image
+                src="/Wishlist.png"
+                width={30}
+                height={50}
+                alt="wishlist image"
+              />
             </Link>
           </div>
           <div className="cursor-pointer">

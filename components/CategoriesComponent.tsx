@@ -34,10 +34,12 @@ const CategoriesComponent: React.FC = () => {
   }, []);
 
   return (
-    <ul className="flex flex-col justify-between h-full">
+    <ul className="flex flex-row md:flex-col justify-between h-full gap-x-[16px] md:gap-x-0">
       {categories.map((category) => (
         <li className="font-normal text-base" key={category.id}>
-          <Link href={`/category/${category.id}`}>{category.name}</Link>
+          <Link className="whitespace-nowrap" href={`/category/${category.id}`}>
+            {category.name}
+          </Link>
         </li>
       ))}
     </ul>

@@ -9,7 +9,15 @@ export default function Test() {
   return (
     <>
       <Swiper
-        slidesPerView={4}
+        slidesPerView={2}
+        breakpoints={{
+          640: {
+            slidesPerView: 3, // 640px და პატარა ეკრანებზე 2 სლაიდი გამოჩნდება
+          },
+          1024: {
+            slidesPerView: 4, // 1024px და ზემოთ 4 სლაიდი გამოჩნდება
+          },
+        }}
         grid={{
           rows: 2,
         }}

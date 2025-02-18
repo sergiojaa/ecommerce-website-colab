@@ -44,8 +44,8 @@ export default function Home() {
 
   return (
     <div style={{ maxWidth: "1170px", margin: "auto" }}>
-      <div className="grid grid-cols-12 gap-[45px] mb-[140px] ">
-        <div className="col-span-3 border-r border-[#D3D3D3] pt-[40px]">
+      <div className="md:grid grid-cols-12 gap-0 md:gap-[45px]  mb-[140px] flex flex-col md:flex-row">
+        <div className="col-span-3 border-r border-[#D3D3D3] pt-[40px] overflow-x-scroll">
           <CategoriesComponent />
         </div>
         <div className="col-span-9 pt-[40px]">
