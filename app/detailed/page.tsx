@@ -28,8 +28,6 @@ export default function Detailed() {
   useEffect(() => {
     if (!id) return;
 
-    const token = localStorage.getItem("token");
-
     axios
       .get(
         `https://geguchadzeadmin.pythonanywhere.com/products/products/${id}/`
