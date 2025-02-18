@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import Link from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import axios from "axios";

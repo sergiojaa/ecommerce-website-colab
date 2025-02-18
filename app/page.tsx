@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import ProductSlider from "@/components/ProductSlider";
 import Service from "@/components/Service";
 import TopProducts from "@/components/TopProducts";
