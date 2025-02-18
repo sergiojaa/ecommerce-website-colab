@@ -18,7 +18,7 @@ const CountdownTimer = () => {
   ];
 
   return (
-    <div className="flex md:gap-[8px] md:gap-[24px] text-black w-full md:w-auto justify-between">
+    <div className="flex sm:gap-[8px] md:gap-[24px] text-black w-full md:w-auto justify-between">
       <div className="flex flex-col items-center justify-center bg-white rounded-full text-center w-[70px] md:w-[90px] h-[70px] md:h-[90px]">
         <div className="text-base font-semibold">{pad(d)}</div>
         <div className="text-xs	font-normal">Days</div>

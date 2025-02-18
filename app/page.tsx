@@ -44,11 +44,11 @@ export default function Home() {
 
   return (
     <div style={{ maxWidth: "1170px", margin: "auto" }}>
-      <div className="md:grid grid-cols-12 gap-0 md:gap-[45px]  mb-[140px] flex flex-col md:flex-row">
-        <div className="col-span-3 border-r border-[#D3D3D3] pt-[40px] overflow-x-scroll">
+      <div className="md:grid grid-cols-12 gap-0 md:gap-[45px] mb-[20px] md:mb-[100px] flex flex-col md:flex-row">
+        <div className="col-span-3 border-r border-[#D3D3D3] pt-[20px] md:pt-[40px] overflow-x-scroll">
           <CategoriesComponent />
         </div>
-        <div className="col-span-9 pt-[40px]">
+        <div className="col-span-9 pt-[10px] md:pt-[40px]">
           <HiroBanner />
         </div>
       </div>

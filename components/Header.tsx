@@ -28,7 +28,7 @@ export default function Header() {
 
   return (
     <div>
-      <div className="flex w-full max-w-[1170px] mx-auto items-center justify-between text-center py-4 px-5 md:px-0">
+      <div className="flex w-full max-w-[1170px] mx-auto items-center justify-between text-center py-[16px] ">
         <div>
           <Link href="/">
             <Image
@@ -40,22 +40,8 @@ export default function Header() {
             />
           </Link>
         </div>
-
-        <div
-          className="md:hidden cursor-pointer"
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          <FontAwesomeIcon
-            icon={menuOpen ? faTimes : faBars}
-            className="text-xl"
-          />
-        </div>
-        <div
-          className={` md:static top-16 left-0 w-full md:w-auto bg-red-500 md:bg-transparent text-white fixed md:text-black p-5 md:p-0 z-10 transition-transform duration-300 ease-in-out ${
-            menuOpen ? "translate-x-0" : "translate-x-full"
-          } md:translate-x-0 md:flex gap-10 cursor-pointer`}
-        >
-          <ul className="flex flex-col md:flex-row gap-5 md:gap-10 items-center">
+        <div className="hidden md:flex ml-[16px]">
+          <ul className="flex items-center gap-10 cursor-pointer">
             <Link href="/">
               <li
                 className={
@@ -106,13 +92,17 @@ export default function Header() {
             </Link>
           </ul>
         </div>
-
-        <div className="hidden md:flex items-center gap-3">
-          <div className="relative w-[243px]">
-            <input
-              placeholder="What are you looking for?"
-              className="w-full h-[38px] bg-[#F5F5F5] pl-3 pr-10 rounded-md"
-              type="text"
+        <div className="relative w-[243px] mx-[10px]">
+          <input
+            placeholder="What are you looking for?"
+            className="w-full h-[38px] bg-[#F5F5F5] pl-3 pr-10 rounded-md"
+            type="text"
+          />
+          <div className="absolute top-1/2 right-3 transform -translate-y-1/2">
+            <FontAwesomeIcon
+              className="w-[16px] h-[16px]"
+              icon={faMagnifyingGlass}
+              style={{ color: "#000000" }}
             />
             <div className="absolute top-1/2 right-3 transform -translate-y-1/2">
               <FontAwesomeIcon
@@ -144,7 +134,45 @@ export default function Header() {
           </div>
         </div>
       </div>
-      <hr />
+      <hr className="hidden md:flex" />
+      <div className="flex md:hidden">
+        <ul className="flex items-center gap-10 cursor-pointer">
+          <Link href="/">
+            <li
+              className={active === "Home" ? "border-b-2 border-black" : ""}
+              onClick={() => handleClick("Home")}
+            >
+              Home
+            </li>
+          </Link>
+          <Link href="/contact">
+            <li
+              className={active === "Contact" ? "border-b-2 border-black" : ""}
+              onClick={() => handleClick("Contact")}
+            >
+              Contact
+            </li>
+          </Link>
+
+          <Link href={"/about"}>
+            <li
+              className={active === "About" ? "border-b-2 border-black" : ""}
+              onClick={() => handleClick("About")}
+            >
+              About
+            </li>
+          </Link>
+
+          <Link href={isAuthed ? "/account" : `/SignUp`}>
+            <li
+              className={active === "Sign Up" ? "border-b-2 border-black" : ""}
+              onClick={() => handleClick("Sign Up")}
+            >
+              {isAuthed ? "Account" : "Sign Up"}
+            </li>
+          </Link>
+        </ul>
+      </div>
     </div>
   );
 }

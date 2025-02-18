@@ -35,7 +35,7 @@ export default function CategorySlider() {
 
   return (
     <>
-      <div className="flex flex-col items-start mb-[10px] md:mb-[60px]">
+      <div className="flex flex-col items-start mb-[10px] md:mb-[30px]">
         <div className="flex items-center mb-0 md:mb-[24px]">
           <div className="bg-[#DB4444] h-[20px] md:h-[40px] w-[20px] rounded mr-2 md:mr-4"></div>
           <p className="text-[#DB4444] text-base font-semibold">Categories</p>

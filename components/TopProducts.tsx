@@ -38,7 +38,7 @@ export default function TopProducts() {
   }
 
   return (
-    <div className="text-center mb-[40px] md:mb-[140px]">
+    <div className="text-center mb-[40px] md:mb-[100px]">
       <div className="flex justify-between items-end mb-[10px] md:mb-[30px]">
         <div className="flex flex-col items-start w-full">
           <div className="flex items-center mb-0 md:mb-[24px]">
