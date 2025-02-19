@@ -41,6 +41,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     return <div>Product data is unavailable.</div>;
   }
   const addToCart = (
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     user: number | React.MouseEvent<HTMLParagraphElement, MouseEvent>
   ) => {
     const token = localStorage.getItem("token");

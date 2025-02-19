@@ -11,22 +11,33 @@ interface UserInfo {
 
 export default function Account() {
   const [info, setInfo] = useState<UserInfo>(() => {
-    const savedInfo = localStorage.getItem("userInfo");
-    return savedInfo
-      ? JSON.parse(savedInfo)
-      : {
-          firstName: "",
-          lastName: "",
-          email: "",
-          address: "",
-        };
+    if (typeof window !== "undefined") {
+      const savedInfo = localStorage.getItem("userInfo");
+      return savedInfo
+        ? JSON.parse(savedInfo)
+        : {
+            firstName: "",
+            lastName: "",
+            email: "",
+            address: "",
+          };
+    } else {
+      return {
+        firstName: "",
+        lastName: "",
+        email: "",
+        address: "",
+      };
+    }
   });
 
   const [message, setMessage] = useState("");
   const router = useRouter();
 
   useEffect(() => {
-    localStorage.setItem("userInfo", JSON.stringify(info));
+    if (typeof window !== "undefined") {
+      localStorage.setItem("userInfo", JSON.stringify(info));
+    }
   }, [info]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,7 +54,9 @@ export default function Account() {
   };
 
   const deleteStorage = () => {
-    localStorage.removeItem("userInfo");
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("userInfo");
+    }
     router.push("/");
   };
 

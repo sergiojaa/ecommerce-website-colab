@@ -3,19 +3,17 @@ import React, { useState, useRef, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Grid, Navigation } from "swiper/modules";
 import ProductCard from "./ProductCard";
-
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  image: string;
-  name: string;
-}
+import { Swiper as SwiperInstance } from "swiper"; // Import Swiper instance type
+import { Product as ProductCardProduct } from "./ProductCard"; // Import Product type from ProductCard
 
 interface ProductSliderProps {
   rows: 1 | 2;
-  products: Product[];
+  products: ProductCardProduct[];
+}
+
+// Define the SwiperRef type
+interface SwiperRef {
+  swiper: SwiperInstance;
 }
 
 const ProductSlider: React.FC<ProductSliderProps> = ({ rows, products }) => {
@@ -24,14 +22,14 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ rows, products }) => {
   const [loading, setLoading] = useState<boolean>(true);
 
   // Refs and effect should be outside any conditional rendering
-  const swiperRef = useRef<Swiper | null>(null);
+  const swiperRef = useRef<SwiperRef | null>(null);
 
   // If you're fetching the products, ensure proper handling here
   useEffect(() => {
     setLoading(false);
   }, [products]);
 
-  const handleSlideChange = (swiper: Swiper) => {
+  const handleSlideChange = (swiper: SwiperInstance) => {
     if (swiper.isEnd) {
       setIsLastSlide(true);
     } else {
@@ -72,7 +70,7 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ rows, products }) => {
             className={`custom-prev-${rows} rounded-full p-2 rotate-180 mr-2 ${
               isFirstSlide ? "bg-none" : "bg-[#F5F5F5]"
             }`}
-            onClick={() => swiperRef.current?.slidePrev()}
+            onClick={() => swiperRef.current?.swiper.slidePrev()}
           >
             <svg
               width="24"
@@ -94,7 +92,7 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ rows, products }) => {
             className={`custom-next-${rows} rounded-full p-2 ${
               isLastSlide ? "bg-none" : "bg-[#F5F5F5]"
             }`}
-            onClick={() => swiperRef.current?.slideNext()}
+            onClick={() => swiperRef.current?.swiper.slideNext()}
           >
             <svg
               width="24"
@@ -116,7 +114,7 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ rows, products }) => {
       </div>
 
       <Swiper
-        onSlideChange={handleSlideChange}
+        onSlideChange={(swiper) => handleSlideChange(swiper)}
         spaceBetween={30}
         slidesPerView={2}
         breakpoints={{

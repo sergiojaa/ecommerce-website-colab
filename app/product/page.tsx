@@ -1,8 +1,8 @@
 "use client";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import Image from "next/image"; // იმპორტი
+import Image from "next/image";
 
 interface Subcategory {
   id: number;
@@ -25,12 +25,12 @@ interface Product {
   is_active: boolean;
   is_in_stock: boolean;
   price: string;
-  size: string[]; // specify the type of elements in the size array
+  size: string[];
   stock: number;
-  subcategory: Subcategory | null; // specify the Subcategory type or null
+  subcategory: Subcategory | null;
 }
 
-export default function Page() {
+function ProductPage() {
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const searchParams = useSearchParams();
@@ -81,8 +81,8 @@ export default function Page() {
           <Image
             src={product.image}
             alt={product.name}
-            width={500} // გთხოვთ, დააყენოთ ზომები
-            height={300} // გთხოვთ, დააყენოთ ზომები
+            width={500}
+            height={300}
             className="object-cover w-full h-full"
           />
         </div>
@@ -91,5 +91,13 @@ export default function Page() {
         </h2>
       </div>
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ProductPage />
+    </Suspense>
   );
 }

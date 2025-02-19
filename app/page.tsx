@@ -9,6 +9,7 @@ import CategorySlider from "@/components/CategorySlider";
 import useFetchProducts from "@/useFetchProducts";
 import HiroBanner from "@/components/HiroBanner";
 import CategoriesComponent from "@/components/CategoriesComponent";
+
 export default function Home() {
   const {
     productData: productData1,

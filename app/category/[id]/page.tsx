@@ -1,14 +1,34 @@
 import React from "react";
 import ProductCard from "@/components/ProductCard";
+
+export interface Color {
+  id: number;
+  name: string;
+}
+
+export interface Size {
+  id: number;
+  name: string;
+}
+
+export interface AdditionalImages {
+  id: number;
+  image: string;
+}
+
 export interface Product {
   id: number;
   title: string;
   name: string;
-
   price: number;
   description: string;
   image: string;
+  is_in_stock: boolean;
+  color: Color[];
+  size: Size[];
+  additional_images: AdditionalImages[];
 }
+
 export default async function page({
   params,
 }: {

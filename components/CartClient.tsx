@@ -4,7 +4,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
-import Image from "next/image"; // იმპორტი
+import Image from "next/image";
 
 type CartItem = {
   product_name: string;
@@ -47,10 +47,15 @@ export default function CartClient({
 
   useEffect(() => {
     if (cartItems.length > 0 && productData.length > 0) {
-      const merged = cartItems.map((cartItem) => {
-        const product = productData.find((p) => p.id === cartItem.product);
-        return { ...cartItem, ...product };
-      });
+      const merged = cartItems
+        .map((cartItem) => {
+          const product = productData.find((p) => p.id === cartItem.product);
+          if (product) {
+            return { ...cartItem, ...product };
+          }
+          return null;
+        })
+        .filter((item): item is CartItem & Product => item !== null);
       setMergedCartItems(merged);
     }
   }, [cartItems, productData]);
@@ -98,10 +103,10 @@ export default function CartClient({
                 <X className="h-5 w-5" />
               </button>
               <Image
-                src={item.image || "/placeholder.svg"} // გამოყენებულია placeholder
+                src={item.image || "/placeholder.svg"}
                 alt={item.name}
-                width={80} // უნდა განისაზღვროს სიდიდე
-                height={80} // უნდა განისაზღვროს სიდიდე
+                width={80}
+                height={80}
                 className="object-cover rounded-lg"
               />
               <span className="font-medium">{item.name}</span>

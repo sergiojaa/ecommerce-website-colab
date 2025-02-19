@@ -1,56 +1,43 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ProductCard from "./ProductCard";
+
+// Define the Color and Size interfaces
+interface Color {
+  id: number;
+  name: string;
+}
+
+interface Size {
+  id: number;
+  name: string;
+}
+
+interface AdditionalImages {
+  id: number;
+  image: string;
+}
 
 // Define the Product interface
 interface Product {
   id: number;
+  title: string;
   name: string;
   price: number;
   image: string;
   description: string;
   is_in_stock: boolean;
+  color: Color[];
+  size: Size[];
+  additional_images: AdditionalImages[];
 }
 
-export default function TopProducts() {
-  const [posts, setPosts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+interface TopProductsProps {
+  products: Product[];
+}
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "https://geguchadzeadmin.pythonanywhere.com/products/products/"
-        );
-        if (!response.ok) {
-          throw new Error("API გადახდა!");
-        }
-        const data: Product[] = await response.json();
-        setPosts(data);
-      } catch (err: unknown) {
-        if (err instanceof Error) {
-          setError(err.message);
-        } else {
-          setError("An unknown error occurred");
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  if (loading) {
-    return <div>დატვირთვა...</div>;
-  }
-
-  if (error) {
-    return <div>შეცდომა: {error}</div>;
-  }
-
+const TopProducts: React.FC<TopProductsProps> = ({ products }) => {
   return (
     <div className="text-center mb-[40px] md:mb-[100px]">
       <div className="flex justify-between items-end mb-[10px] md:mb-[30px]">
@@ -70,10 +57,12 @@ export default function TopProducts() {
         </div>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {posts.slice(0, 4).map((product: Product) => (
+        {products.slice(0, 4).map((product: Product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
     </div>
   );
-}
+};
+
+export default TopProducts;

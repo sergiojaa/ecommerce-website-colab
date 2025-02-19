@@ -1,11 +1,12 @@
 "use client";
 import ProductSlider from "@/components/ProductSlider";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import useFetchProducts from "@/useFetchProducts";
 import { useSearchParams } from "next/navigation";
 import { Product } from "@/components/ProductCard";
 import axios from "axios";
-export default function Detailed() {
+
+function Detailed() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
   const { productData: productData2 } = useFetchProducts(
@@ -14,7 +15,6 @@ export default function Detailed() {
 
   const [product, setProduct] = useState<Product | null>(null);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
-
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
 
@@ -25,6 +25,7 @@ export default function Detailed() {
   const handleDecrease = () => {
     setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
   };
+
   useEffect(() => {
     if (!id) return;
 
@@ -43,14 +44,14 @@ export default function Detailed() {
 
   return (
     <div>
-      <div className=" max-w-[1170px]   mx-auto">
+      <div className="max-w-[1170px] mx-auto">
         <p className="text-sm font-normal my-[80px]">Account</p>
         <div>
           <div className="flex">
             <div className="grid grid-cols-12 gap-[70px] mb-[140px]">
               <div className="bg-yellow-500">
                 {product?.additional_images.map((item, index) => (
-                  <div className="w-[100px] " key={index}>
+                  <div className="w-[100px]" key={index}>
                     <img
                       className="w-[300px] py-3"
                       src={item.image}
@@ -104,19 +105,17 @@ export default function Detailed() {
                       <div key={color.id}>
                         <button
                           className="px-2 py-1 h-[30px] w-[30px] border border-gray-300 rounded-md"
-                          onClick={() => setSelectedColor(color.name)} // აქ ფერის არჩევას აიძულებთ
+                          onClick={() => setSelectedColor(color.name)}
                           style={{
                             backgroundColor: color.name.toLowerCase(),
                             border:
                               selectedColor === color.name
                                 ? "2px solid black"
                                 : "",
-                            borderRadius: "50%", // რაუნდი ფორმის ღილაკები
+                            borderRadius: "50%",
                             cursor: "pointer",
                           }}
-                        >
-                          {/* აქ შეგვიძლია დავტოვოთ მხოლოდ ფერის ვადევნო */}
-                        </button>
+                        ></button>
                       </div>
                     ))}
                   </div>
@@ -152,7 +151,7 @@ export default function Detailed() {
                   <span className="w-[80px] text-center">{quantity}</span>
                   <button
                     onClick={handleIncrease}
-                    className="px-3 py-1 border-l border-gray-300 "
+                    className="px-3 py-1 border-l border-gray-300"
                   >
                     +
                   </button>
@@ -179,7 +178,7 @@ export default function Detailed() {
                 </div>
               </div>
 
-              <div className="flex mt-5  flex-col border border-[#00000080] rounded">
+              <div className="flex mt-5 flex-col border border-[#00000080] rounded">
                 <div className="flex items-center px-[16px] py-[24px] gap-[16px]">
                   <svg
                     width="40"
@@ -281,7 +280,7 @@ export default function Detailed() {
                       />
                     </g>
                     <defs>
-                      <clipPath id="clip0_261_4865">
+                      <clipPath id="clip0_261_4865)">
                         <rect width="40" height="40" fill="white" />
                       </clipPath>
                     </defs>
@@ -301,9 +300,17 @@ export default function Detailed() {
           </div>
         </div>
       </div>
-      <div className=" max-w-[1170px] mx-auto ">
+      <div className="max-w-[1170px] mx-auto">
         <ProductSlider rows={1} products={productData2} />
-      </div>{" "}
+      </div>
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Detailed />
+    </Suspense>
   );
 }

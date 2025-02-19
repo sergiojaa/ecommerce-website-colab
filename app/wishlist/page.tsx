@@ -2,7 +2,8 @@
 
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Image from "next/image"; // ეს უნდა იყოს იმპორტირებული
+import Image from "next/image";
+
 type WishlistItem = {
   id: number;
   product: number;
@@ -63,10 +64,12 @@ export default function Wishlist() {
 
   useEffect(() => {
     if (wishlistProducts.length > 0 && products.length > 0) {
-      const merged = wishlistProducts.map((wishlistItem) => {
-        const product = products.find((p) => p.id === wishlistItem.product);
-        return product ? { ...wishlistItem, ...product } : wishlistItem;
-      });
+      const merged = wishlistProducts
+        .map((wishlistItem) => {
+          const product = products.find((p) => p.id === wishlistItem.product);
+          return product ? { ...wishlistItem, ...product } : null;
+        })
+        .filter((item): item is WishlistItem & Product => item !== null);
       setMergedWishlistItems(merged);
     }
   }, [wishlistProducts, products]);
@@ -84,8 +87,8 @@ export default function Wishlist() {
             <Image
               src={item.image}
               alt={item.name}
-              width={160} // Adjust the width as needed
-              height={160} // Adjust the height as needed
+              width={160}
+              height={160}
               className="object-cover rounded-md"
             />
             <h2 className="text-lg font-semibold mt-2">{item.name}</h2>

@@ -2,7 +2,8 @@
 import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import FetchCategories from "@/FetchCategories";
-import { Navigation, Swiper as SwiperType } from "swiper/modules"; // Import Swiper type
+import { Navigation } from "swiper/modules"; // Import Navigation module
+import { Swiper as SwiperType } from "swiper"; // Import Swiper type from swiper module
 import Image from "next/image";
 
 // Import Swiper styles
@@ -11,6 +12,11 @@ import "swiper/css/free-mode";
 
 // Import required modules
 import { FreeMode } from "swiper/modules";
+
+// Define the SwiperRef type
+interface SwiperRef {
+  swiper: SwiperType;
+}
 
 export default function CategorySlider() {
   const { productData, loading, error } = FetchCategories();
@@ -33,7 +39,7 @@ export default function CategorySlider() {
   };
 
   // Use proper type for swiperRef
-  const swiperRef = useRef<SwiperType | null>(null);
+  const swiperRef = useRef<SwiperRef | null>(null);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
