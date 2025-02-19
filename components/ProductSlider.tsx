@@ -22,17 +22,16 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ rows, products }) => {
   const [isLastSlide, setIsLastSlide] = useState(false);
   const [isFirstSlide, setIsFirstSlide] = useState(true);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
 
   // Refs and effect should be outside any conditional rendering
-  const swiperRef = useRef<any>(null);
+  const swiperRef = useRef<Swiper | null>(null);
 
   // If you're fetching the products, ensure proper handling here
   useEffect(() => {
     setLoading(false);
   }, [products]);
 
-  const handleSlideChange = (swiper: any) => {
+  const handleSlideChange = (swiper: Swiper) => {
     if (swiper.isEnd) {
       setIsLastSlide(true);
     } else {
@@ -49,8 +48,6 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ rows, products }) => {
   // Check if products are empty or unavailable
   if (loading)
     return <div className="text-center text-gray-700">Loading...</div>;
-  if (error)
-    return <div className="text-center text-red-500">Error: {error}</div>;
   if (!products || products.length === 0)
     return (
       <div className="text-center text-gray-700">No products available</div>
@@ -75,7 +72,7 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ rows, products }) => {
             className={`custom-prev-${rows} rounded-full p-2 rotate-180 mr-2 ${
               isFirstSlide ? "bg-none" : "bg-[#F5F5F5]"
             }`}
-            onClick={() => swiperRef.current?.swiper.slidePrev()}
+            onClick={() => swiperRef.current?.slidePrev()}
           >
             <svg
               width="24"
@@ -97,7 +94,7 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ rows, products }) => {
             className={`custom-next-${rows} rounded-full p-2 ${
               isLastSlide ? "bg-none" : "bg-[#F5F5F5]"
             }`}
-            onClick={() => swiperRef.current?.swiper.slideNext()}
+            onClick={() => swiperRef.current?.slideNext()}
           >
             <svg
               width="24"

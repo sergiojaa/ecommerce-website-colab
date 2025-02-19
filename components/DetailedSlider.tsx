@@ -33,7 +33,12 @@ const DetailedSlider = () => {
             className="mySwiper detailed-swiper overflow-hidden"
             style={{ maxHeight: "560px" }}
           >
-            {/* SwiperSlides here */}
+            {/* Add SwiperSlide components here */}
+            <SwiperSlide>Slide 1</SwiperSlide>
+            <SwiperSlide>Slide 2</SwiperSlide>
+            <SwiperSlide>Slide 3</SwiperSlide>
+            <SwiperSlide>Slide 4</SwiperSlide>
+            {/* You can add more slides as needed */}
           </Swiper>
         </div>
 
@@ -45,7 +50,12 @@ const DetailedSlider = () => {
             modules={[FreeMode, Thumbs]}
             className="mySwiper2"
           >
-            {/* SwiperSlides here */}
+            {/* Add SwiperSlide components here */}
+            <SwiperSlide>Content 1</SwiperSlide>
+            <SwiperSlide>Content 2</SwiperSlide>
+            <SwiperSlide>Content 3</SwiperSlide>
+            <SwiperSlide>Content 4</SwiperSlide>
+            {/* You can add more slides as needed */}
           </Swiper>
         </div>
       </div>

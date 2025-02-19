@@ -3,8 +3,18 @@
 import React, { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 
+// Define the Product interface
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  image: string;
+  description: string;
+  is_in_stock: boolean;
+}
+
 export default function TopProducts() {
-  const [posts, setPosts] = useState<any[]>([]);
+  const [posts, setPosts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -17,10 +27,14 @@ export default function TopProducts() {
         if (!response.ok) {
           throw new Error("API გადახდა!");
         }
-        const data = await response.json();
+        const data: Product[] = await response.json();
         setPosts(data);
-      } catch (error: any) {
-        setError(error.message);
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("An unknown error occurred");
+        }
       } finally {
         setLoading(false);
       }
@@ -56,7 +70,7 @@ export default function TopProducts() {
         </div>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {posts.slice(0, 4).map((product: any) => (
+        {posts.slice(0, 4).map((product: Product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>

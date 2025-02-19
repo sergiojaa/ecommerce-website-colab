@@ -8,11 +8,9 @@ import Link from "next/link";
 export default function Header() {
   const [active, setActive] = useState("Home");
   const [isAuthed, setIsAuthed] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleClick = (page: string) => {
     setActive(page);
-    setMenuOpen(false);
   };
 
   useEffect(() => {
