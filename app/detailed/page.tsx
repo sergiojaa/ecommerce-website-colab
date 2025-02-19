@@ -51,7 +51,11 @@ export default function Detailed() {
               <div className="bg-yellow-500">
                 {product?.additional_images.map((item, index) => (
                   <div className="w-[100px] " key={index}>
-                    <img className="w-[300px] py-3" src={item.image} />
+                    <img
+                      className="w-[300px] py-3"
+                      src={item.image}
+                      alt="img"
+                    />
                   </div>
                 ))}
               </div>
