@@ -14,32 +14,15 @@ export default function SignIn() {
 
   const inputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-
     setError("");
-
-    if (name === "email_or_phone") {
-      if (/^\d+$/.test(value)) {
-        setUser((prevUser) => ({
-          ...prevUser,
-          [name]: value,
-        }));
-      } else {
-        setUser((prevUser) => ({
-          ...prevUser,
-          [name]: value,
-        }));
-      }
-    } else {
-      setUser((prevUser) => ({
-        ...prevUser,
-        [name]: value,
-      }));
-    }
+    setUser((prevUser) => ({
+      ...prevUser,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     setError("");
 
     axios
@@ -58,12 +41,12 @@ export default function SignIn() {
   };
 
   return (
-    <div className="flex mt-[60px] w-[1300px] mx-auto">
-      <div className="flex flex-1 items-start justify-start">
+    <div className="flex flex-col lg:flex-row mt-[60px] w-full max-w-[1300px] mx-auto px-4 lg:px-0">
+      <div className="flex flex-1 items-start justify-center lg:justify-start">
         <Image src="/signUp.png" width={690} height={81} alt="logo" />
       </div>
 
-      <div className="flex flex-1 justify-center items-center">
+      <div className="flex flex-1 justify-center items-center mt-10 lg:mt-0">
         <div className="w-full max-w-md">
           <div className="flex flex-col gap-1">
             <h1 className="text-[36px]">Log in to EXCLUSIVE</h1>
