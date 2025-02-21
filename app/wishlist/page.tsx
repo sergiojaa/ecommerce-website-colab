@@ -3,6 +3,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 type WishlistItem = {
   id: number;
@@ -20,6 +21,7 @@ type Product = {
 };
 
 export default function Wishlist() {
+  const router = useRouter()
   const [wishlistProducts, setWishlistProducts] = useState<WishlistItem[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
   const [mergedWishlistItems, setMergedWishlistItems] = useState<
@@ -45,15 +47,13 @@ export default function Wishlist() {
       });
   };
 
-  const getProducts = () => {
-    axios
-      .get("https://geguchadzeadmin.pythonanywhere.com/products/products/")
-      .then((res) => {
-        setProducts(res.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+  const getProducts = async () => {
+
+    const response = await fetch("https://geguchadzeadmin.pythonanywhere.com/products/products/", {
+      cache: "no-store"
+    })
+    const data = await response.json()
+    setProducts(data)
   };
 
   useEffect(() => {
@@ -73,7 +73,30 @@ export default function Wishlist() {
       setMergedWishlistItems(merged);
     }
   }, [wishlistProducts, products]);
+  const addToCart = (
+    productId: number
+  ) => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return router.push("/SignIn");
+    }
 
+    axios
+      .post(
+        "https://geguchadzeadmin.pythonanywhere.com/cart/cart-items/",
+        {
+          quantity: 1,
+          product: productId,
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div className="p-10">
       <h1 className="text-2xl font-bold mb-4">Your Wishlist</h1>
@@ -94,7 +117,7 @@ export default function Wishlist() {
             <h2 className="text-lg font-semibold mt-2">{item.name}</h2>
             <p className="text-red-500 font-bold">${item.price}</p>
             <p className="text-gray-500 text-sm">Added at: {item.added_at}</p>
-            <button className="mt-2 px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800">
+            <button onClick={() => addToCart(item.product)} className="mt-2 px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800">
               <span role="img" aria-label="cart">
                 🛒
               </span>{" "}

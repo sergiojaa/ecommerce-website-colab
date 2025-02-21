@@ -32,17 +32,14 @@ export default function CartClient({
     (CartItem & Product)[]
   >([]);
 
-  const getCartItems = (token: string) => {
-    axios
-      .get("https://geguchadzeadmin.pythonanywhere.com/cart/cart-items/", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => {
-        setCartItems(res.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+  const getCartItems = async (token: string) => {
+    const response = await fetch('https://geguchadzeadmin.pythonanywhere.com/cart/cart-items/', {
+      headers: { Authorization: `Bearer ${token}` },
+      cache: 'no-store'
+
+    })
+    const data = await response.json()
+    setCartItems(data)
   };
 
   useEffect(() => {
@@ -74,10 +71,24 @@ export default function CartClient({
     (acc, item) => acc + item.price * item.quantity,
     0
   );
-
+  const removeItem = (cartItemId: number) => {
+    const token = localStorage.getItem('token')
+    if (!token) {
+      console.error('No Authentication found')
+      return
+    }
+    axios
+      .delete(`https://geguchadzeadmin.pythonanywhere.com/cart/cart-items/${cartItemId}/`, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      .then(() => {
+        setCartItems((prevItems) => prevItems.filter(item => item.order !== cartItemId));
+      })
+      .catch((err) => console.log(err));
+  };
+  console.log(mergedCartItems)
   return (
     <div className="max-w-[1200px] mx-auto px-4 py-8">
-      {/* Header */}
       <div className="grid grid-cols-[2fr,1fr,1fr,1fr] gap-4 mb-6 px-4">
         <h3 className="text-base font-medium text-gray-600">Product</h3>
         <h3 className="text-base font-medium text-gray-600 text-center">
@@ -99,7 +110,7 @@ export default function CartClient({
             className="grid grid-cols-[2fr,1fr,1fr,1fr] gap-4 items-center bg-white rounded-lg shadow-sm p-4"
           >
             <div className="flex items-center gap-4">
-              <button className="text-gray-400 hover:text-gray-600 transition-colors">
+              <button onClick={() => removeItem(item.id)} className="text-gray-400 hover:text-gray-600 transition-colors">
                 <X className="h-5 w-5" />
               </button>
               <Image
@@ -136,7 +147,6 @@ export default function CartClient({
         ))}
       </div>
 
-      {/* Actions */}
       <div className="flex justify-between mt-8">
         <button
           onClick={() => router.push("/shop")}
@@ -149,7 +159,6 @@ export default function CartClient({
         </button>
       </div>
 
-      {/* Coupon and Cart Total */}
       <div className="grid md:grid-cols-2 gap-8 mt-8">
         <div className="flex gap-4">
           <input

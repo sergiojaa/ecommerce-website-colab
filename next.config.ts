@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
       "s3-alpha-sig.figma.com",
       "cdn.salla.sa",
       "prod-api.mediaexpert.pl",
-      "cdn.trixie.de", // Add this domain
+      "cdn.trixie.de",
     ],
   },
 };
