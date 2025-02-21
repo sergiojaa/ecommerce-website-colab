@@ -47,7 +47,7 @@ export default function SignUp() {
       return;
     }
     if (!user.email && !user.phone_number) {
-      setError("Email or phone number is required");
+      setError("Email  is required");
       return;
     }
     if (!passwordRegex.test(user.password)) {
@@ -99,7 +99,7 @@ export default function SignUp() {
             />
             <input
               onChange={handleInputChange}
-              placeholder="Email or Phone Number"
+              placeholder="Enter Email "
               name="emailOrNumber"
               value={emailOrNumberInput}
               className="border-b-2 border-gray-300 focus:outline-none focus:border-blue-500 p-2"
