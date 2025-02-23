@@ -132,12 +132,12 @@ export default function CartClient({
                   className="w-16 text-center py-2 px-2"
                   readOnly
                 />
-                <div className="flex flex-col border-l">
-                  <button className="px-2 py-[1px] hover:bg-gray-50 border-b">
+                {/* <div className="flex flex-col border-l"> */}
+                {/* <button className="px-2 py-[1px] hover:bg-gray-50 border-b">
                     ▲
-                  </button>
-                  <button className="px-2 py-[1px] hover:bg-gray-50">▼</button>
-                </div>
+                  </button> */}
+                {/* <button className="px-2 py-[1px] hover:bg-gray-50">▼</button> */}
+                {/* </div> */}
               </div>
             </div>
             <div className="text-center">
