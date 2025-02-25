@@ -71,18 +71,19 @@ export default function CartClient({
     (acc, item) => acc + item.price * item.quantity,
     0
   );
-  const removeItem = (cartItemId: number) => {
+  const removeItem = (id: number) => {
     const token = localStorage.getItem('token')
     if (!token) {
       console.error('No Authentication found')
       return
     }
     axios
-      .delete(`https://geguchadzeadmin.pythonanywhere.com/cart/cart-items/${cartItemId}/`, {
+      .delete(`https://geguchadzeadmin.pythonanywhere.com/cart/cart-items/${id}/`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(() => {
-        setCartItems((prevItems) => prevItems.filter(item => item.order !== cartItemId));
+        setCartItems((prevItems) => prevItems.filter(item => item.order !== id));
+        console.log(cartItems)
       })
       .catch((err) => console.log(err));
   };
