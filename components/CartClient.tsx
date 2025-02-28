@@ -11,6 +11,7 @@ type CartItem = {
   quantity: number;
   product: number;
   order: number;
+  id: string
 };
 
 type Product = {
@@ -71,21 +72,24 @@ export default function CartClient({
     (acc, item) => acc + item.price * item.quantity,
     0
   );
-  const removeItem = (id: number) => {
-    const token = localStorage.getItem('token')
+  const removeItem = (id: string) => {
+    const token = localStorage.getItem('token');
+
     if (!token) {
-      console.error('No Authentication found')
-      return
+      console.error('No Authentication found');
+      return;
     }
+
     axios
       .delete(`https://geguchadzeadmin.pythonanywhere.com/cart/cart-items/${id}/`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(() => {
-        setCartItems((prevItems) => prevItems.filter(item => item.order !== id));
-        console.log(cartItems)
+        setCartItems(prevItems => prevItems.filter(item => item.id !== id));
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.error('Error deleting item:', err.response?.data || err.message);
+      });
   };
   console.log(mergedCartItems)
   return (
@@ -103,7 +107,6 @@ export default function CartClient({
         </h3>
       </div>
 
-      {/* Cart Items */}
       <div className="space-y-6">
         {mergedCartItems.map((item, index) => (
           <div
@@ -111,7 +114,9 @@ export default function CartClient({
             className="grid grid-cols-[2fr,1fr,1fr,1fr] gap-4 items-center bg-white rounded-lg shadow-sm p-4"
           >
             <div className="flex items-center gap-4">
-              <button onClick={() => removeItem(item.id)} className="text-gray-400 hover:text-gray-600 transition-colors">
+              <button
+                onClick={() => removeItem(item.id)}
+                className="text-gray-400 hover:text-gray-600 transition-colors">
                 <X className="h-5 w-5" />
               </button>
               <Image
