@@ -80,10 +80,9 @@ export default function CartClient({
       return;
     }
 
-    axios
-      .delete(`https://geguchadzeadmin.pythonanywhere.com/cart/cart-items/${id}/`, {
-        headers: { Authorization: `Bearer ${token}` }
-      })
+    axios.delete(`https://geguchadzeadmin.pythonanywhere.com/cart/cart-items/${id}/`, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
       .then(() => {
         setCartItems(prevItems => prevItems.filter(item => item.id !== id));
       })
