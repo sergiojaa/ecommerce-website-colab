@@ -32,12 +32,11 @@ export default function CartClient({
   const [mergedCartItems, setMergedCartItems] = useState<
     (CartItem & Product)[]
   >([]);
-
+  const [id, setId] = useState<number>()
   const getCartItems = async (token: string) => {
     const response = await fetch('https://geguchadzeadmin.pythonanywhere.com/cart/cart-items/', {
       headers: { Authorization: `Bearer ${token}` },
       cache: 'no-store'
-
     })
     const data = await response.json()
     setCartItems(data)
@@ -81,9 +80,10 @@ export default function CartClient({
     }
 
     axios.delete(`https://geguchadzeadmin.pythonanywhere.com/cart/cart-items/${id}/`, {
-      headers: { Authorization: `Bearer ${token}` }
+      headers: { Authorization: `Bearer ${token}` },
     })
       .then(() => {
+        console.log(cartItems)
         setCartItems(prevItems => prevItems.filter(item => item.id !== id));
       })
       .catch((err) => {
