@@ -2,11 +2,9 @@
 
 This project is an ecommerce website developed as part of a team competition at Algouni. I collaborated with one other front-end developer and a back-end developer (Python) to create a visually appealing and functional online store. The website allows users to add products to their basket and wishlist, providing a seamless shopping experience.
 
-> ⚠️ **Note:** The project is still in progress. The images are not yet displaying as they should, as the back-end needs to fetch them from the database.
-
 ## 🌐 Live Website
 
-🔗 coming soon...
+🔗 https://ecommerce-colab.vercel.app/
 
 ---
 
