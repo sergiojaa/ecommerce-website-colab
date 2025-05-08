@@ -2,7 +2,9 @@
 import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import FetchCategories from "@/FetchCategories";
-import { Navigation } from "swiper/modules";
+import { Navigation } from "swiper/modules"; // Import Navigation module
+import { Swiper as SwiperType } from "swiper"; // Import Swiper type from swiper module
+import Image from "next/image";
 
 // Import Swiper styles
 import "swiper/css";
@@ -11,11 +13,18 @@ import "swiper/css/free-mode";
 // Import required modules
 import { FreeMode } from "swiper/modules";
 
+// Define the SwiperRef type
+interface SwiperRef {
+  swiper: SwiperType;
+}
+
 export default function CategorySlider() {
-  const { productData, loading, error } = FetchCategories(); // Use FetchCategories to get data
+  const { productData, loading, error } = FetchCategories();
   const [isLastSlide, setIsLastSlide] = useState(false);
   const [isFirstSlide, setIsFirstSlide] = useState(true);
-  const handleSlideChange = (swiper: any) => {
+
+  // Update to use the correct type for swiper
+  const handleSlideChange = (swiper: SwiperType) => {
     if (swiper.isEnd) {
       setIsLastSlide(true);
     } else {
@@ -28,20 +37,24 @@ export default function CategorySlider() {
       setIsFirstSlide(false);
     }
   };
-  const swiperRef = useRef<any>(null);
 
-  if (loading) return <div>Loading...</div>; // Show loading state
-  if (error) return <div>{error}</div>; // Show error message
+  // Use proper type for swiperRef
+  const swiperRef = useRef<SwiperRef | null>(null);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
 
   return (
     <>
-      <div className="flex flex-col items-start mb-[60px]">
-        <div className="flex items-center mb-[24px]">
-          <div className="bg-[#DB4444] h-[40px] w-[20px] rounded mr-4"></div>
+      <div className="flex flex-col items-start mb-[10px] md:mb-[30px]">
+        <div className="flex items-center mb-0 md:mb-[24px]">
+          <div className="bg-[#DB4444] h-[20px] md:h-[40px] w-[20px] rounded mr-2 md:mr-4"></div>
           <p className="text-[#DB4444] text-base font-semibold">Categories</p>
         </div>
         <div className="flex justify-between items-end w-full">
-          <p className="mr-[86px] text-4xl font-semibold">Browse By Category</p>
+          <p className="mr-[20px] md:mr-[86px] text-xl font-semibold">
+            Browse By Category
+          </p>
           <div>
             <button
               className={`custom-prev rounded-full p-2 rotate-180 mr-2 ${
@@ -92,7 +105,15 @@ export default function CategorySlider() {
       </div>
       <Swiper
         onSlideChange={handleSlideChange}
-        slidesPerView={5}
+        slidesPerView={2}
+        breakpoints={{
+          640: {
+            slidesPerView: 3,
+          },
+          1024: {
+            slidesPerView: 4,
+          },
+        }}
         spaceBetween={30}
         freeMode={true}
         modules={[FreeMode, Navigation]}
@@ -103,22 +124,22 @@ export default function CategorySlider() {
         ref={swiperRef}
         className="mySwiper"
       >
-        {/* Dynamic rendering of SwiperSlide using the fetched data */}
         {productData.map((subcategory, index) => (
           <SwiperSlide
             key={index}
             className="flex justify-center items-center p-2"
           >
-            <div className="border border-[#0000004D] p-[24px] rounded-lg shadow-md w-full text-center">
-              {/* Display category name and subcategory name */}
+            <div className="border border-[#0000004D] p-[10px] md:p-[24px] rounded-lg shadow-md w-full text-center">
               {subcategory.category.imageUrl ? (
-                <img
-                  src={subcategory.category.imageUrl} // ან სწორი სტრუქტურის მიხედვით
+                <Image
+                  src={subcategory.category.imageUrl}
                   alt={subcategory.sub_name}
+                  width={500}
+                  height={300}
                   className="w-full h-auto rounded-lg"
                 />
               ) : (
-                <div>No image available</div> // თუ სურათი არ არის
+                <div></div>
               )}
               <h3 className="text-lg font-semibold text-gray-800">
                 {subcategory.sub_name}
@@ -127,7 +148,7 @@ export default function CategorySlider() {
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className="w-full bg-[#D3D3D3] h-[1px] my-[70px]"></div>
+      <div className="w-full bg-[#D3D3D3] h-[1px] my-[20px] md:my-[70px]"></div>
     </>
   );
 }

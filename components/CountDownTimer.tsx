@@ -18,20 +18,20 @@ const CountdownTimer = () => {
   ];
 
   return (
-    <div className="flex gap-[24px] text-black">
-      <div className="flex flex-col items-center justify-center bg-white rounded-full text-center w-[90px] h-[90px]">
+    <div className="flex sm:gap-[8px] md:gap-[24px] text-black w-full md:w-auto justify-between">
+      <div className="flex flex-col items-center justify-center bg-white rounded-full text-center w-[70px] md:w-[90px] h-[70px] md:h-[90px]">
         <div className="text-base font-semibold">{pad(d)}</div>
         <div className="text-xs	font-normal">Days</div>
       </div>
-      <div className="flex flex-col items-center justify-center bg-white rounded-full text-center w-[90px] h-[90px]">
+      <div className="flex flex-col items-center justify-center bg-white rounded-full text-center w-[70px] md:w-[90px] h-[70px] md:h-[90px]">
         <div className="text-base font-semibold">{pad(h)}</div>
         <div className="text-xs	font-normal">Hours</div>
       </div>
-      <div className="flex flex-col items-center justify-center bg-white rounded-full text-center w-[90px] h-[90px]">
+      <div className="flex flex-col items-center justify-center bg-white rounded-full text-center w-[70px] md:w-[90px] h-[70px] md:h-[90px]">
         <div className="text-base font-semibold">{pad(m)}</div>
         <div className="text-xs	font-normal">Minutes</div>
       </div>
-      <div className="flex flex-col items-center justify-center bg-white rounded-full text-center w-[90px] h-[90px]">
+      <div className="flex flex-col items-center justify-center bg-white rounded-full text-center w-[70px] md:w-[90px] h-[70px] md:h-[90px]">
         <div className="text-base font-semibold">{pad(s)}</div>
         <div className="text-xs	font-normal">Seconds</div>
       </div>

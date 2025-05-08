@@ -3,36 +3,33 @@ import React, { useState, useRef, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Grid, Navigation } from "swiper/modules";
 import ProductCard from "./ProductCard";
-
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  image: string;
-  name: string
-}
+import { Swiper as SwiperInstance } from "swiper"; // Import Swiper instance type
+import { Product as ProductCardProduct } from "./ProductCard"; // Import Product type from ProductCard
 
 interface ProductSliderProps {
   rows: 1 | 2;
-  products: Product[];
+  products: ProductCardProduct[];
+}
+
+// Define the SwiperRef type
+interface SwiperRef {
+  swiper: SwiperInstance;
 }
 
 const ProductSlider: React.FC<ProductSliderProps> = ({ rows, products }) => {
   const [isLastSlide, setIsLastSlide] = useState(false);
   const [isFirstSlide, setIsFirstSlide] = useState(true);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
 
   // Refs and effect should be outside any conditional rendering
-  const swiperRef = useRef<any>(null);
+  const swiperRef = useRef<SwiperRef | null>(null);
 
   // If you're fetching the products, ensure proper handling here
   useEffect(() => {
     setLoading(false);
   }, [products]);
 
-  const handleSlideChange = (swiper: any) => {
+  const handleSlideChange = (swiper: SwiperInstance) => {
     if (swiper.isEnd) {
       setIsLastSlide(true);
     } else {
@@ -49,30 +46,30 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ rows, products }) => {
   // Check if products are empty or unavailable
   if (loading)
     return <div className="text-center text-gray-700">Loading...</div>;
-  if (error)
-    return <div className="text-center text-red-500">Error: {error}</div>;
   if (!products || products.length === 0)
     return (
       <div className="text-center text-gray-700">No products available</div>
     );
 
   return (
-    <div className="text-center mb-[80px]">
-      <div className="flex justify-between items-end mb-[30px]">
+    <div className="text-center mb-[40px] md:mb-[80px]">
+      <div className="flex justify-between items-end mb-[10px] md:mb-[30px]">
         <div className="flex flex-col items-start">
-          <div className="flex items-center mb-[24px]">
-            <div className="bg-[#DB4444] h-[40px] w-[20px] rounded mr-4"></div>
+          <div className="flex items-center mb-0 md:mb-[24px]">
+            <div className="bg-[#DB4444] h-[20px] md:h-[40px] w-[20px] rounded mr-2 md:mr-4"></div>
             <p className="text-[#DB4444] text-base font-semibold">Today’s</p>
           </div>
           <div className="flex items-center">
-            <p className="mr-[86px] text-4xl font-semibold">Flash Sales</p>
-            <p>22:22:22</p>
+            <p className="mr-[20px] md:mr-[86px] text-xl font-semibold">
+              Flash Sales
+            </p>
           </div>
         </div>
         <div>
           <button
-            className={`custom-prev-${rows} rounded-full p-2 rotate-180 mr-2 ${isFirstSlide ? "bg-none" : "bg-[#F5F5F5]"
-              }`}
+            className={`custom-prev-${rows} rounded-full p-2 rotate-180 mr-2 ${
+              isFirstSlide ? "bg-none" : "bg-[#F5F5F5]"
+            }`}
             onClick={() => swiperRef.current?.swiper.slidePrev()}
           >
             <svg
@@ -92,8 +89,9 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ rows, products }) => {
             </svg>
           </button>
           <button
-            className={`custom-next-${rows} rounded-full p-2 ${isLastSlide ? "bg-none" : "bg-[#F5F5F5]"
-              }`}
+            className={`custom-next-${rows} rounded-full p-2 ${
+              isLastSlide ? "bg-none" : "bg-[#F5F5F5]"
+            }`}
             onClick={() => swiperRef.current?.swiper.slideNext()}
           >
             <svg
@@ -116,9 +114,17 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ rows, products }) => {
       </div>
 
       <Swiper
-        onSlideChange={handleSlideChange}
+        onSlideChange={(swiper) => handleSlideChange(swiper)}
         spaceBetween={30}
-        slidesPerView={4}
+        slidesPerView={2}
+        breakpoints={{
+          640: {
+            slidesPerView: 3, // 640px და პატარა ეკრანებზე 2 სლაიდი გამოჩნდება
+          },
+          1024: {
+            slidesPerView: 4, // 1024px და ზემოთ 4 სლაიდი გამოჩნდება
+          },
+        }}
         grid={{
           rows: rows,
           fill: "row",
@@ -128,7 +134,7 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ rows, products }) => {
           nextEl: `.custom-next-${rows}`,
           prevEl: `.custom-prev-${rows}`,
         }}
-        className="mb-[60px]"
+        className="mb-[10px] md:mb-[60px]"
         ref={swiperRef}
       >
         {products.map((product) => (
@@ -138,7 +144,7 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ rows, products }) => {
         ))}
       </Swiper>
 
-      <p className="inline-block bg-[#DB4444] py-4 px-[48px] text-3 text-base font-medium text-white mb-[60px]">
+      <p className="inline-block bg-[#DB4444] py-2 px-[48px] text-3 text-xs font-medium text-white mb-[40px] md:mb-[60px]">
         View All Products
       </p>
 

@@ -6,6 +6,11 @@ interface Category {
   name: string;
 }
 
+interface ApiCategory {
+  id: number;
+  name: string;
+}
+
 const CategoriesComponent: React.FC = () => {
   const [categories, setCategories] = useState<Category[]>([]);
 
@@ -18,9 +23,9 @@ const CategoriesComponent: React.FC = () => {
         if (!response.ok) {
           throw new Error("Failed to fetch categories");
         }
-        const data = await response.json();
+        const data: ApiCategory[] = await response.json(); // Define the expected type here
         // Map only the required fields
-        const mappedCategories = data.map((category: any) => ({
+        const mappedCategories = data.map((category) => ({
           id: category.id,
           name: category.name,
         }));
@@ -34,10 +39,12 @@ const CategoriesComponent: React.FC = () => {
   }, []);
 
   return (
-    <ul className="flex flex-col justify-between h-full">
+    <ul className="flex flex-row md:flex-col justify-between h-full gap-x-[16px] md:gap-x-0">
       {categories.map((category) => (
         <li className="font-normal text-base" key={category.id}>
-          <Link href={`/category/${category.id}`}>{category.name}</Link>
+          <Link className="whitespace-nowrap" href={`/category/${category.id}`}>
+            {category.name}
+          </Link>
         </li>
       ))}
     </ul>

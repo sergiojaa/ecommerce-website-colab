@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import ProductSlider from "@/components/ProductSlider";
 import Service from "@/components/Service";
 import TopProducts from "@/components/TopProducts";
@@ -9,6 +9,7 @@ import CategorySlider from "@/components/CategorySlider";
 import useFetchProducts from "@/useFetchProducts";
 import HiroBanner from "@/components/HiroBanner";
 import CategoriesComponent from "@/components/CategoriesComponent";
+
 export default function Home() {
   const {
     productData: productData1,
@@ -44,11 +45,11 @@ export default function Home() {
 
   return (
     <div style={{ maxWidth: "1170px", margin: "auto" }}>
-      <div className="grid grid-cols-12 gap-[45px] mb-[140px] ">
-        <div className="col-span-3 border-r border-[#D3D3D3] pt-[40px]">
+      <div className="md:grid grid-cols-12 gap-0 md:gap-[45px] mb-[20px] md:mb-[100px] flex flex-col md:flex-row">
+        <div className="col-span-3 border-r border-[#D3D3D3] pt-[20px] md:pt-[40px] overflow-x-scroll">
           <CategoriesComponent />
         </div>
-        <div className="col-span-9 pt-[40px]">
+        <div className="col-span-9 pt-[10px] md:pt-[40px]">
           <HiroBanner />
         </div>
       </div>
